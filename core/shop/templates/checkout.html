@@ -1,0 +1,1761 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Checkout {% endblock title %}
+
+{% block body %}
+
+		<!--start page wrapper -->
+		<!--start page wrapper -->
+		<div>
+			
+			<div class="separator p-4">
+				<div class="line"></div>
+				<h5 class="mb-0 fw-bold separator-title">CheckOut</h5>
+				<div class="line"></div>
+			 </div>
+		
+			<!--start shop cart-->
+			<section class=" d-flex align-items-center justify-content-center">
+				<div class="container">
+					<div class="shop-cart">
+						<div class="row">
+							<div class="col-12">
+								<div class="checkout-details">
+					
+									<div class="card rounded-0">
+										<div class="card-body">
+											<div class="d-flex align-items-center justify-items-center mb-3">
+											
+										
+												</div>
+											</div>
+											<div class="border p-3">
+												<h2 class="h5 mb-0">Shipping Address</h2>
+												<div class="my-3 border-bottom"></div>
+												<div class="form-body">
+													<form method="POST" class="row g-3">
+														{% csrf_token %}
+														<input type="hidden" name="itemsJson" id="itemsJson">
+
+														<div class="col-md-6">
+															<label class="form-label">Full Name</label>
+															<input type="text" name="fname" class="form-control rounded-0"placeholder="Enter your full name*" required>
+														</div>
+							
+														<div class="col-md-6">
+															<label class="form-label">E-mail(Optional)</label>
+															<input type="email"name="email" placeholder="Enter your Email"class="form-control rounded-0" >
+														</div>
+														<div class="col-md-6">
+															<label class="form-label">Phone Number</label>
+															<input type="text" name="phone" placeholder="Phone number*" class="form-control rounded-0" pattern="(^\+88)?01[0-9]{9}" title="Please enter a valid Bangladeshi phone number. It should either start with +88 and be followed by 11 digits or start with 01 and be followed by 9 digits." minlength="11" maxlength="14" required>
+														</div>
+														
+														
+												
+														<div class="col-md-6">
+															<label class="form-label">State/Province</label>
+															<select class="form-select rounded-0" name="state" id="stateSelect"required>
+																<option value="" selected disabled>Select State</option>
+
+
+																<option value="Dhaka">Dhaka</option>
+																<option value="Dinajpur">Dinajpur</option>
+																<option value="Faridpur">Faridpur</option>
+																<option value="Feni">Feni</option>
+																<option value="Gaibandha">Gaibandha</option>
+																<option value="Gazipur">Gazipur</option>
+																<option value="Gopalganj">Gopalganj</option>
+																<option value="Habiganj">Habiganj</option>
+																<option value="Jamalpur">Jamalpur</option>
+																<option value="Jessore">Jessore</option>
+																<option value="Jhalokati">Jhalokati</option>
+																<option value="Jhenaidah">Jhenaidah</option>
+																<option value="Joypurhat">Joypurhat</option>
+																<option value="Khagrachhari">Khagrachhari</option>
+																<option value="Khulna">Khulna</option>
+																<option value="Kishoreganj">Kishoreganj</option>
+																<option value="Kurigram">Kurigram</option>
+																<option value="Kushtia">Kushtia</option>
+																<option value="Lakshmipur">Lakshmipur</option>
+																<option value="Lalmonirhat">Lalmonirhat</option>
+																<option value="Madaripur">Madaripur</option>
+																<option value="Magura">Magura</option>
+																<option value="Manikganj">Manikganj</option>
+																<option value="Meherpur">Meherpur</option>
+																<option value="Moulvibazar">Moulvibazar</option>
+																<option value="Munshiganj">Munshiganj</option>
+																<option value="Mymensingh">Mymensingh</option>
+																<option value="Naogaon">Naogaon</option>
+																<option value="Narail">Narail</option>
+																<option value="Narayanganj">Narayanganj</option>
+																<option value="Narsingdi">Narsingdi</option>
+																<option value="Natore">Natore</option>
+																<option value="Netrakona">Netrakona</option>
+																<option value="Nilphamari">Nilphamari</option>
+																<option value="Noakhali">Noakhali</option>
+																<option value="Pabna">Pabna</option>
+																<option value="Panchagarh">Panchagarh</option>
+																<option value="Patuakhali">Patuakhali</option>
+																<option value="Pirojpur">Pirojpur</option>
+																<option value="Rajbari">Rajbari</option>
+																<option value="Rajshahi">Rajshahi</option>
+																<option value="Rangamati">Rangamati</option>
+																<option value="Rangpur">Rangpur</option>
+																<option value="Satkhira">Satkhira</option>
+																<option value="Shariatpur">Shariatpur</option>
+																<option value="Sherpur">Sherpur</option>
+																<option value="Sirajganj">Sirajganj</option>
+																<option value="Sunamganj">Sunamganj</option>
+																<option value="Sylhet">Sylhet</option>
+																<option value="Tangail">Tangail</option>
+																<option value="Thakurgaon">Thakurgaon</option>
+																<option value="Bagerhat">Bagerhat</option>
+																<option value="Bandarban">Bandarban</option>
+																<option value="Barguna">Barguna</option>
+																<option value="Barisal">Barisal</option>
+																<option value="Bhola">Bhola</option>
+																<option value="Bogra">Bogra</option>
+																<option value="Brahmanbaria">Brahmanbaria</option>
+																<option value="Chandpur">Chandpur</option>
+																<option value="Chapai Nawabganj">Chapai Nawabganj</option>
+																<option value="Chittagong">Chittagong</option>
+																<option value="Chuadanga">Chuadanga</option>
+																<option value="Comilla">Comilla</option>
+																<option value="Coxs Bazar">Cox's Bazar</option>
+
+
+															</select>
+														</div>
+													
+
+														<div class="col-md-6">
+															
+															<label class="form-label" >City /Area</label>
+															<p style="color:red;">(Delivary inside Dhaka 70Tk outside Dhaka 130 TK)</p>
+															<select class="form-select rounded-0 " name="city" id="citySelect"  required>
+																<option value="" selected disabled>Select City</option>
+
+															</select>															
+														</div>
+														
+														<div class="col-md-6">
+															<label class="form-label" required>Full Address:</label>
+															<textarea class="form-control rounded-0" name="address"placeholder="Enter address where you want us to deliver your product*" required></textarea>
+														</div>
+
+														  <hr>
+														  <h2 class="h5 mb-0">Payment Type</h2>
+														  <hr>
+														  <label>
+															<input type="checkbox" name="payment_type" value="Cash"onclick="handlePaymentTypeChange(this)">
+															Cash On Delivery
+														  </label>
+														  <div class="text-center">
+															<h6 class="mb-0 h5 text-center">  <label>
+																{% if shop_info %}
+																<input type="checkbox" name="payment_typeOnline" value="online" onclick="handlePaymentTypeChange(this)">
+																Bkash/Nogod/Rocket (Send Money)
+															  </label> <br></h6>
+															  <p>Please complete your bkash payment at first, then fill up the form below. Also note that 2% bkash "Payment" cost will be added with net price. Total amount you need to send us at <br><b><h6 style="color:red;" >Bkash Personal Number : {{ shop_info.onlinePaymentNumber }} <br>(Personal*)<h6></b></p>
+															{% endif %}
+															<hr>
+															<div>
+															  <label for="send_phone_number">Sender Phone Number:</label> <br>
+															  <input type="text" id="send_phone_number" name="send_phone_number" required>
+															</div>
+															<br>
+															<div>
+															  <label for="transaction_number">Transaction Number:</label> <br>
+															  <input type="text" id="transaction_number" name="transaction_number" required>
+															</div>
+														  </div>
+														  
+							
+														<br><br>
+														<div class="col-md-6">
+															<input type="checkbox" id="saveOrderInfoCheckbox" required>
+															<label class="form-label"> <li>I have read and agree to the website <a href="{% url "privacy" %}">terms and conditions.<a/></li> 
+															<li>Save Order Info for later </li></label>
+															
+														</div>
+														<br><br>
+
+														
+														<hr>
+														<div class="card-body">
+															<p class="mb-2">
+															  Subtotal : <span id="subtotal" class="float-end">$0.00</span>
+															</p>
+															<p class="mb-2">
+															  Delivery charge : <span id="deliveryCharge" class="float-end">--</span>
+															</p>
+													
+															<p class="mb-2">
+															  Online Payment charge: <span id="onlinePaymentCharge" class="float-end">--</span>
+															</p>
+															<p class="mb-2">
+																Discounts: <span id="discount" class="float-end">--</span>
+															  </p>
+														  
+															<div class="my-3 border-top"></div>
+															<h5 class="mb-0">
+															
+															  Order Total (TAKA): <span id="orderTotal" class="float-end">0.00 TK</span>
+															  <input type="hidden" name="price" id="orderTotalSend" class="float-end">
+
+															</h5>
+
+															<div class="my-4"></div>
+														  </div>
+														  
+														<div class="col-md-6">
+															<div class="d-grid">
+																	<a href="{% url "cart" %}" class="btn btn-light btn-ecomm"><i class='bx bx-chevron-left'></i>Back to Cart</a>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="d-grid">
+																<button id="confirmOrderBtn" type="submit" class="btn btn-dark btn-ecomm">Confirm Order</button>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+						<!--end row-->
+					</div>
+			</section>
+			
+			<!--end shop cart-->
+		</div>
+	</div>
+
+		<!--end page wrapper -->
+		<!--prevent to submit empty cart -->
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Function to check if the cart is empty
+				function isCartEmpty() {
+					var cart = JSON.parse(localStorage.getItem('cart')) || [];
+					return cart.length === 0;
+				}
+			
+				// Function to enable or disable the confirm order button based on cart emptiness
+				function toggleConfirmOrderButton() {
+					var confirmOrderBtn = document.getElementById('confirmOrderBtn');
+					if (isCartEmpty()) {
+						confirmOrderBtn.disabled = true;
+						confirmOrderBtn.innerText = 'Your Cart is Empty'; // Change the text
+					} else {
+						confirmOrderBtn.disabled = false;
+						confirmOrderBtn.innerText = 'Confirm Order'; // Reset to original text
+					}
+				}
+			
+				// Initial toggle of confirm order button on page load
+				toggleConfirmOrderButton();
+			
+				// Event listener for checkbox change
+				var saveOrderInfoCheckbox = document.getElementById('saveOrderInfoCheckbox');
+				saveOrderInfoCheckbox.addEventListener('change', function() {
+					toggleConfirmOrderButton();
+				});
+			});
+			
+			
+		</script>
+		<!--prevent to submit empty cart -->
+		<!--end page wrapper -->
+
+
+
+
+
+		<!-- form address choice -->
+
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				var stateSelect = document.getElementById('stateSelect');
+				var citySelect = document.getElementById('citySelect');
+				var thanaSelect = document.getElementById('thanaSelect');
+			
+				stateSelect.addEventListener('change', function() {
+					var selectedState = stateSelect.value;
+					// Here you can make an AJAX request to fetch cities of the selected state
+					// For demonstration purposes, I'm just providing a static example
+					var cities = getCitiesForState(selectedState);
+			
+					// Clear previous city options and add new options
+					citySelect.innerHTML = '<option value="" selected disabled>Select City</option>';
+					cities.forEach(function(city) {
+						var option = document.createElement('option');
+						option.value = city;
+						option.textContent = city;
+						citySelect.appendChild(option);
+					});
+				});
+			
+				citySelect.addEventListener('change', function() {
+					var selectedCity = citySelect.value;
+					// Here you can make an AJAX request to fetch thanas of the selected city
+					// For demonstration purposes, I'm just providing a static example
+					var thanas = getThanasForCity(selectedCity);
+			
+					// Clear previous thana options and add new options
+					thanaSelect.innerHTML = '<option value="" selected disabled>Select Thana</option>';
+					thanas.forEach(function(thana) {
+						var option = document.createElement('option');
+						option.value = thana;
+						option.textContent = thana;
+						thanaSelect.appendChild(option);
+					});
+				});
+			
+				// Dummy function to simulate fetching cities for a state
+				function getCitiesForState(state) {
+					// Replace this with actual AJAX request to fetch cities
+					if (state === 'Dhaka') {
+						return ['Adabor', 'Aftabnagar', 'Ahmed Bagh', 'Airport', 'Airport Road', 'Amtoli', 'Aowlad Hossain Lane', 'Arambagh', 'Arjot Para', 'Armanitola', 'Asadgate', 'Ashulia', 'Aurangajeb road', 'Avoy Das Lane', 'Azampur', 'Azimpur', 'Babar Road', 'Babar Road', 'Baburial', 'Badamtoli', 'Badda', 'Baily Road', 'Bakshibazar', 'Kallyanpur', 'Bakura Balughat', 'Banagram', 'Banani', 'Banasree', 'Banga Bandhu Stadium', 'Banga Bhaban', 'Bangla Bazar', 'Bangla Motor', 'Bangshal', 'Baridhara', 'Bashabo','Bashantak', 'Bashbari', 'Bashir Uddin Road', 'Bashundhara', 'Baten Nagar', 'Baten Nagar', 'Begunbari', 'Bhashantek', 'Bijoy Nagar', 'Bongo Islamia Market', 'Bonogram', 'Bonosree', 'Buet', 'Cantonment', 'Koilash Ghosh Lane', 'Captain Bazar', 'Cawak Bazar', 'Central Road', 'Chamelibag', 'Chankarpul Lane', 'Charkaliganj', 'Circuit House Road', 'Circular Road', 'Court House Street', 'Crescent Road', 'Dania', 'Darussalam', 'Demra', 'Dewan Mension Road', 'Dhaka Cant', 'Dhaka Medical Coll', 'Dhaka University', 'Dhakhinkhan', 'Dhakhkhin Khan', 'Dhalpur', 'Dhamrai','Dhanmondi', 'Dholaikhal', 'Dholaikhal', 'Dholaipar', 'Dilkusha', 'Dilu Road', 'Dit Road Dohar', 'Dohs Baridhara', 'Dohs Mohakhali East Maniknagar', 'Elephant Road', 'Eskaton Road', 'Farashgonj', 'Faridabad', 'Farmgate', 'Fokirapul', 'Free School Street', 'Fullar Road', 'Gabtoli', 'Gajipur', 'Gandaria', 'Girda Urddu Road', 'Golapbag', 'Gopibag', 'Goran', 'Green Road', 'Gulbag', 'Gulistan', 'Gulshan', 'Gulshan-1', 'Gulshan-2', 'Haji Para', 'Hatirpool', 'Hatkhola Road', 'Hazaribagh', 'Ibrahim Pur', 'Imamganj', 'Indira Road', 'Indrani Road', 'Iqbal Road', 'Islam Mension Road', 'Jagannathpur', 'Jahangirnagar University', 'Jakir Hossain Road', 'Jamalpur', 'Janson Road', 'Japan Garden City', 'Jasimuddin Road', 'Jatrabari', 'Jigatola', 'Joar Sahara', 'Jumrail Lane', 'Jurian', 'K.b.rudra Road', 'K.m Das Lane', 'Kadamtoli', 'Kafrul', 'Kailash Ghosh Lane', 'Kakoli', 'Kakrail', 'Kalabagan','Kalachandpur', 'Kali Bari Road', 'Kaltabazar', 'Kamal Ataturk Avenue', 'Kamalapur', 'Kamringir Char', 'Katabon', 'Kathal Baghan', 'Kawlar', 'Kawran Bazar', 'Kayettuly', 'Kazi Abdul Hamid Road', 'Kazi Alauddin Road', 'Kazi Nazrul Islam', 'Kazi Nazrul Islam Avenue', 'Kazi Para', 'Kb Rudra Road', 'Keraniganj', 'Khazi Dewan', 'Khilgaon', 'Khilkhet', 'Koltabazar', 'Kolutola', 'Kotowali', 'Kuril', 'Kurmitola Lake Circus', 'Lal Mohonshaha', 'Lalbagh Lalmatia', 'Lutfar Rahman Lane', 'Luxmibazar', 'Madartek', 'Mahuttully', 'Malibagh', 'Malitola', 'Manda', 'Manik Mia Avenue', 'Manik Nagar', 'Manikdi', 'Maradia', 'Matuail', 'Mazid Sardar Road', 'Menadia', 'Minto Road', 'Mirbagh', 'Mirpur', 'Mirpur Cantonment', 'Mirpur Dohs', 'Mirpur Road', 'Mirpur-1', 'Mirpur-11', 'Mirpur-10','Mirpur-12', 'Mirpur-13', 'Mirpur-14', 'Mirpur-2', 'Mirpur-6', 'Mirpur-7', 'Mitford Road', 'Mogbazar', 'Mogoltooly', 'Mohakhali', 'Mohammadpur', 'Mohamodia Housing Ltd', 'Mohanogor R/a', 'Mollartek', 'Momin Bagh', 'Moneshawar Road', 'Monipur', 'Motijheel', 'Mugda', 'Nawabganj', 'New Cirqular Road', 'New Market New Paltan', 'Niketan', 'Nikunja', 'Nikunja-2', 'Nilkhet', 'Nimtoli', 'Nishat Nagar', 'Nobab Road Nobinbagh', 'North Brook Hall Road', 'North Circular Road', 'Noya Palton', 'Old Airport Road', 'Old Dhaka', 'Osman Gani Road', 'Outer Circular Road', 'P C Culture Housing', 'Paikpara Pallabi', 'Paltan Paltan', 'Panthopath', 'Paribagh', 'Park Road', 'Pathlighata', 'Patla Khan Lane', 'Phokirapool', 'Pilkhana', 'Pirerbag', 'Polashi', 'Postogola', 'Progoti Sharani', 'Purana Paltan', 'R>K Mission Road', 'Radkhola', 'Rishab Bazar', 'Rajarbagh', 'Rayer Bazar', 'Ramakanta Nandi Lane', 'Ramna', 'Rampura', 'Rankin Street', 'Razar Dewry', 'Rajabazar', 'Roma Kantondi Len', 'Rupnagar', 'Sabujbagh', 'Sadarghat Road', 'Saidpur', 'Santibag Chotopool', 'Santibagh','Santinagar', 'Satmosjid Road', 'Satroja', 'Savar', 'Savar', 'Sayedabad', 'Segunbagicha', 'Shah Ali', 'Shahajadpur', 'Shahbag', 'Shaheen Bagh', 'Shahid Bagh', 'Shahjahanpur', 'Shamibag', 'Shamoly', 'Shankar', 'Shantibagh', 'Shantinagar', 'Sherebanglanagar', 'Shewra Para', 'Shiddheswri', 'Shobhanbag', 'Shohidbug', 'Shomshar Nogor', 'Shonir Akra', 'Shyampur', 'Shypahibag', 'Siddeswari', 'Siddique Bazar', 'Simsom Road', 'Singtola', 'Sir Iqbal Road', 'Sobhanbagh', 'Sonargaon Road', 'Sorafat Gonj Lane', 'South Begunbari', 'South Block Street', 'Strand Road', 'Sukrabad', 'Sutrapur', 'Swamibag', 'Taherbagh Lane', 'Tajuddin Soroni', 'Tallabag', 'Tatibazar', 'Tejgaon', 'Tejkunipara', 'Tejturi Bazar', 'Wasa Road', 'West Dolairpar', 'West Kazipara', 'Thatari Bazar', 'Tikatuly', 'Tipu Sultan Road', 'Topkhana Road', 'Toyenbi Circular Road', 'Turag', 'Uttara West', 'Uttarkhan', 'Vatara Wari', 'Zasim Bazar', 'Uttara', 'West Meradia', 'West Panthopath', 'Zafrabad', 'Zigatola', 'Zindabahar'];
+
+
+						// Example cities for Dhaka state
+					} 
+					else if (state === 'Barisal') {
+						return ["Agailjhara",
+						"B.m. College Road",
+						"Babuganj",
+						"Bakerganj",
+						"Banaripara",
+						"Barisal Sadar",
+						"Bogra Road",
+						"Gournadi",
+						"Hizla",
+						"Mehendiganj",
+						"Muladi",
+						"New Vhatikhana Road",
+						"Shadar Road",
+						"Wazirpur"]; // Example cities for Barisal state
+					}
+					else if (state === 'Bagerhat') {
+						return ["Bagerhat Sadar",
+						"Chitalmari",
+						"Fakirhat",
+						"Kachua",
+						"Mollahat",
+						"Mongla",
+						"Morrelganj",
+						"Nojarkhanpur",
+						"Rampal",
+						"Sarankhola"]; // Example cities for Barisal state
+					}
+					else if (state === 'Bandarban') {
+						return ["Alikadam",
+						"Bandarban Sadar",
+						"Lama",
+						"Naikhongchhari",
+						"Rowangchhari",
+						"Ruma",
+						"Thanchi"]; // Example cities for Barisal state
+					}
+					else if (state === 'Barguna') {
+						return ["Amtali",
+						"Bamna",
+						"Barguna Sadar",
+						"Betagi",
+						"Patharghata"]; // Example cities for Barisal state
+					}
+					else if (state === 'Bhola') {
+						return ["Agailjhara",
+						"Bhola Sadar",
+						"Burhanuddin",
+						"Charfasson",
+						"Daulatkhan",
+						"Kunjerhat",
+						"Lalmohan",
+						"Manpura",
+						"Muslim Para",
+						"Tazumuddin"]; // Example cities for Barisal state
+					}
+					else if (state === 'Bogra') {
+						return ["Adamdighi",
+						"Badurtala",
+						"Bogra Sadar",
+						"Boro Gola",
+						"Dhunat",
+						"Dupchanchia",
+						"Fuldighi",
+						"Gabtali",
+						"Jaleshwaritola",
+						"Kahaloo",
+						"Nandigram",
+						"Sariakandi",
+						"Sherpur",
+						"Shibganj",
+						"Sonatola",
+						"Uposhahor"]; // Example cities for Barisal state
+					}
+					else if (state === 'Brahmanbaria') {
+						return ["Akhaura",
+						"Asugonj",
+						"Bancharampur",
+						"Borer Bazar",
+						"Brahmanbaria Sadar",
+						"Kasba",
+						"Machihata",
+						"Medda",
+						"Nabinagar",
+						"Nasirnagar",
+						"Sarail"]; // Example cities for Barisal state
+					}
+					else if (state === 'Chandpur') {
+						return ["Chandpur Sadar",
+						"Faridganj",
+						"Goakhala Road",
+						"Haimchar",
+						"Hajiganj",
+						"J.m Sengupta Road",
+						"Kachua",
+						"Koralia Road",
+						"Matlab",
+						"Shahrasti",
+						"Shologhar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Chapai Nawabganj') {
+						return ["Bholahat",
+						"Gomastapur",
+						"Nachole",
+						"Nawabganj Sadar",
+						"Shibganj"]; // Example cities for Barisal state
+					}
+					else if (state === 'Chittagong') {
+						return ["Agrabad",
+						"Ahmedbagh",
+						"Ambagan",
+						"Anderkilla",
+						"Anwara",
+						"Artillary Road",
+						"Asadgonj",
+						"Ashaghar Dighir Par",
+						"Ashkarabad",
+						"Askar Deegir Par",
+						"B.c.c Road",
+						"Badsha Miah Chy Road",
+						"Bakalia",
+						"Bandar",
+						"Bandarban",
+						"Bandartilla",
+						"Banshkhali",
+						"Beverly Hill",
+						"Bhatiary",
+						"Bibirhat-ctg",
+						"Biozid Bostami",
+						"Biponi Bitan",
+						"Birhat",
+						"Bn School And Colleg",
+						"Boalkhali",
+						"Bridgeghat",
+						"Cda Building",
+						"Cepz",
+						"Chaktai",
+						"Chandanaish",
+						"Chandanpur",
+						"Chandgaon",
+						"Chandra Sen Lane",
+						"Chatforhad Bagh",
+						"Chawkbazar",
+						"Chitiagong Cantt",
+						"Chitiagong University",
+						"Choiteshwari Road",
+						"Chouhatia",
+						"Chowmphony",
+						"Cmc",
+						"College Road",
+						"Comira",
+						"Cpa",
+						"D.r. Nizam Road R/a",
+						"Dampara",
+						"Dewanbazar",
+						"Dewanhat",
+						"Dhamdana",
+						"Enayet Bazar",
+						"Epz",
+						"Fakir Hat Road",
+						"Fatehabad",
+						"Fatikchhari",
+						"Feni",
+						"Feringee Bazar",
+						"Feroz Shah Colony ",
+						"Fouzdarhat",
+						"Foys Lake",
+						"Getforhad Bagh",
+						"Golpahar",
+						"Gopur Mantion",
+						"Gozi Shah Lane",
+						"Green View R/a",
+						"Gulbagh",
+						"Guytakhal",
+						"H.m Mohsin College",
+						"Hajipara",
+						"Halishahar",
+						"Harish Datta Lane",
+						"Hatbazar",
+						"Hathazari",
+						"Hazari Lane",
+						"Hensen Lane",
+						"Khulshi",
+						"Korbaniganj",
+						"Kornofully",
+						"Kotwali",
+						"Kulgaon",
+						"Lakshmipur",
+						"Lal Deghi",
+						"Lalkhan Bazar",
+						"Lohagara",
+						"Love Lane",
+						"Lucky Plaza",
+						"M.m. Ali Road",
+						"Mader Bari",
+						"Madharsha",
+						"Mansurabad",
+						"Matrinerh",
+						"Mazirghat",
+						"Mehedi Bag",
+						"Mia Khan Road",
+						"Mirsharai",
+						"Mogultooly Bazar",
+						"Mohara",
+						"Mooring",
+						"Muradpur",
+						"Muslimabad",
+						"Nalapara, Ctg",
+						"Nandan Kanon",
+						"Nasirabad",
+						"Nazer Bari",
+						"New Chaktai",
+						"New Data Bazar",
+						"New Market",
+						"New Muring",
+						"North Agrabad",
+						"North Kattali",
+						"Nur Ahmed",
+						"Nurbag R/a",
+						"O.r. Nizam Road",
+						"Omar Ali Lane",
+						"Oxygen",
+						"P.c Road",
+						"Pahartali",
+						"Panchlaish",
+						"Patandandi",
+						"Patenga",
+						"Pathar Ghata",
+						"Patiya",
+						"Port Officers Colony",
+						"Rahmatgonj",
+						"Railway Colony",
+						"Rajmukut Comm Center",
+						"Ramjoy Mohajan Lane",
+						"Rampur",
+						"Rangamati",
+						"Raozan",
+						"Rauggadia",
+						"Reazuddin Road",
+						"Rohman",
+						"Rohman Nagar",
+						"Rohomothganj",
+						"Rumghta",
+						"S.k. Mujib Rd.",
+						"S.s Khaled Road",
+						"Sandwip",
+						"Satkania",
+						"Sersan Road ",
+						"Shaat Hazari",
+						"Shah Garibullah",
+						"Shahid Mirza Lane",
+						"Sholoshohor",
+						"Sitakunda",
+						"Sk. Mujib Road",
+						"Station Road",
+						"Sugandha",
+						"Taherabad",
+						"Tigarpas",
+						"Wasa Tv Pool",
+						"Zakir Hossain Road"
+					]; // Example cities for Barisal state
+					}
+					else if (state === 'Chuadanga') {
+						return ["Alamdanga",
+						"Chuadanga Sadar",
+						"Damurhuda",
+						"Jibannagar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Comilla') {
+						return ["Alekhar Char",
+						"Badurtola",
+						"Bagichagaon",
+						"Barura",
+						"Brahmanpara",
+						"Burichang",
+						"Chandina",
+						"Chapapur",
+						"Chartha",
+						"Chatipatti",
+						"Chauddagram",
+						"Chomohoni",
+						"Chotora",
+						"Comilla Cantt",
+						"Comilla Sadar",
+						"Companigonj",
+						"Darmo Sagor",
+						"Daroga Bari",
+						"Daudkandi",
+						"Debidwar",
+						"Dharmapur",
+						"Durgapur",
+						"Epz Road",
+						"Homna",
+						"Jaudge Court Road",
+						"Jawtala",
+						"Kandirpar",
+						"Kotibari",
+						"Laksham",
+						"Laladighir Par",
+						"Mogoultully",
+						"Monohargaon",
+						"Monoharpur",
+						"Muradnagar",
+						"Nangalkot",
+						"Nawva Dighir Par",
+						"Nazrul Avenue",
+						"New Chowdhurypara",
+						"Police Line",
+						"Race Course",
+						"Rajgonj",
+						"Rammala Road",
+						"Ranir Bazar",
+						"Ranir Dighir Par",
+						"Talpukur Par",
+						"Thakur Para",
+						"Tomsom Bridge",
+						"Zangalia"]; // Example cities for Barisal state
+					}
+					else if (state === 'Coxs Bazar') {
+						return ["Chakaria",
+						"Coxs Bazar Sadar",
+						"Kutubdia",
+						"Maheshkhali",
+						"Ramu",
+						"Sayeman Road",
+						"Teknaf",
+						"Ukhia"]; // Example cities for Barisal state
+					}
+			
+					else if (state === 'Dinajpur') {
+						return ["Biral",
+						"Birampur",
+						"Birganj",
+						"Bochaganj",
+						"Chirirbandar",
+						"Dinajpur Sadar",
+						"Dinajpurur Medical College",
+						"Ghoraghat",
+						"Hakimpur",
+						"Kaharole",
+						"Khansama",
+						"Nawabganj",
+						"New Town",
+						"Parbatipur",
+						"Phulbari",
+						"Setalgonj",
+						"Suihari"]; // Example cities for Barisal state
+					}
+					else if (state === 'Faridpur') {
+						return [ "Alfadanga",
+						"Bhanga",
+						"Boalmari",
+						"Charbhadrasan",
+						"Faridpur Sadar",
+						"Madhukhali",
+						"Nagarkanda",
+						"Sadarpur",
+						"Shaltha"]; // Example cities for Barisal state
+					}
+					else if (state === 'Feni') {
+						return ["Chhagalnaiya",
+						"Daganbhuiyan",
+						"Feni Sadar",
+						"Parshuram",
+						"Phulgazi",
+						"S.s.k Road",
+						"S.s.p Road",
+						"Sonagazi",
+						"Trunk Road"]; // Example cities for Barisal state
+					}
+					else if (state === 'Gaibandha') {
+						return ["Fulchhari",
+						"Gaibandha Sadar",
+						"Gobindaganj",
+						"Palashbari",
+						"Sadullapur",
+						"Sughatta",
+						"Sundarganj"]; // Example cities for Barisal state
+					}
+					else if (state === 'Gazipur') {
+						return ["Bhawal-mirzapur",
+						"Board Bazar",
+						"Chandana",
+						"Dattapara",
+						"Joydebpur",
+						"Kaliakior",
+						"Kaliganj",
+						"Kamarjuri",
+						"Kapasia",
+						"Kashimpur",
+						"Konabari",
+						"National University",
+						"Pirojali",
+						"Shaha Para",
+						"Shimultoli",
+						"Sripur",
+						"Tongi",
+						"Turag"]; // Example cities for Barisal state
+					}
+					else if (state === 'Gopalganj') {
+						return ["Gopalganj",
+						"Kashiani",
+						"Kotalipara",
+						"Mohammedpara",
+						"Muksudpur",
+						"Tungipara"]; // Example cities for Barisal state
+					}
+					else if (state === 'Habiganj') {
+						return ["Ajmiriganj",
+						"Bahubal",
+						"Baniachang",
+						"Chunarughat",
+						"Gurning Park",
+						"Habiganj Sadar",
+						"Lakhai",
+						"Madhabpur",
+						"Mahmuda Bad",
+						"Nabiganj",
+						"Sadrabad"]; // Example cities for Barisal state
+					}
+					else if (state === 'Jamalpur') {
+						return ["Baksiganj",
+						"Bokul Tola",
+						"Dewanganj",
+						"Islampur",
+						"Jamalpur Sadar",
+						"Madarganj",
+						"Melandaha",
+						"Narundi Police I.c",
+						"Sarishabari"]; // Example cities for Barisal state
+					}
+					else if (state === 'Jessore') {
+						return [ "Abhaynagar",
+						"Bagherpara",
+						"Chaugachha",
+						"Jessore Cantonment",
+						"Jessore Sadar",
+						"Jhikargachha",
+						"Karbala",
+						"Kashabpur",
+						"Kazipara",
+						"Keshabpur",
+						"Manirampur",
+						"Nowapara",
+						"Rajghat",
+						"Sharsha"]; // Example cities for Barisal state
+					}
+					else if (state === 'Jhalokati') {
+						return ["Jhalokati Sadar",
+						"Kathalia",
+						"Nalchity",
+						"Rajapur"]; // Example cities for Barisal state
+					}
+					else if (state === 'Jhenaidah') {
+						return ["Harinakunda",
+						"Jhenaidaha Sadar",
+						"Kaliganj",
+						"Kotchandpur",
+						"Maheshpur",
+						"Shailkupa"]; // Example cities for Barisal state
+					}
+					else if (state === 'Joypurhat') {
+						return ["Akkelpur",
+						"Joypurhat Sadar",
+						"Kalai",
+						"Khetlal",
+						"Panchbibi"]; // Example cities for Barisal state
+					}
+					else if (state === 'Khagrachhari') {
+						return ["Dighinala",
+						"Khagrachhari Sadar",
+						"Lakshmichhari",
+						"Mahalchhari",
+						"Manikchhari",
+						"Matiranga",
+						"Mujgunni",
+						"Panchhari",
+						"Ramgarh",
+						"Sadar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Khulna') {
+						return [ "Babu Khan Road",
+						"Bagmara Road",
+						"Banorghati",
+						"Baoundary Road",
+						"Basupara Lane",
+						"Batiaghata",
+						"Boro Bazar",
+						"Boyra",
+						"Cemetree Road",
+						"Central Road",
+						"Chanmari",
+						"Chotoboyra",
+						"Chuadanga",
+						"Cross Road",
+						"Dacope",
+						"Darogapara",
+						"Daulatpur",
+						"Deben Babu Road",
+						"Dharmoshava Road",
+						"Dighalia",
+						"Dst Bar Association",
+						"Dumuria",
+						"East Bania Kamar",
+						"Farazipara",
+						"Ferighat",
+						"Fultola",
+						"Goalkhali Housing",
+						"Goborchaka",
+						"Gogon Babu Road",
+						"Gollamari",
+						"Hazi Ismail Road",
+						"Hazi Mohsin Road",
+						"Hotel Castle Salam",
+						"Iqbal Nagar Mosjidrd",
+						"Islampur",
+						"Jahanabad Cantt",
+						"Jalil Saroni",
+						"Jkhari Terokhada",
+						"K.d.a. Avenue",
+						"Kakolibag",
+						"Kalibari Bazar",
+						"Khalishpur",
+						"Khan Jahan Ali",
+						"Khan-a-sabur Road",
+						"Khanjahan Main Road",
+						"Khulna Power Station",
+						"Khulna Shipyard",
+						"Khulna Tank Road",
+						"Khulna University",
+						"Kmc",
+						"Kmch",
+						"Kotwali",
+						"Koyra",
+						"Kuet",
+						"M.t. Road",
+						"Mia Para",
+						"Mirza Pur",
+						"Mongla",
+						"Moulavipara",
+						"Nirala",
+						"Norail",
+						"Paikgachha",
+						"Palpara Road",
+						"Phultala",
+						"Politechnic College",
+						"Raypara",
+						"Rupsa",
+						"Shamsur R Road",
+						"Sheikh Para Bazar",
+						"Sher-e-bangla Road",
+						"Shibbari",
+						"Shilpo Banik Bhaban",
+						"Shipyard Road",
+						"Shiromoni",
+						"Silpa Bank Bhaban",
+						"Sir Iqbal Road",
+						"Solayman Nagar",
+						"Sonadanga",
+						"South Central Road",
+						"Taltola Mosque Road",
+						"Terokhada",
+						"Tigarpas",
+						"Tootpara",
+						"Zahidur Rahman Sarak"]; // Example cities for Barisal state
+					}
+					else if (state === 'Kishoreganj') {
+						return ["Astagram",
+						"Bajitpur",
+						"Bhairab",
+						"Hossainpur",
+						"Itna",
+						"Karimganj",
+						"Katiadi",
+						"Kishoreganj Sadar",
+						"Kuliarchar",
+						"Mithamain",
+						"Mukshedpur",
+						"Nikli",
+						"Pakundia",
+						"Tarail"]; // Example cities for Barisal state
+					}
+					else if (state === 'Kurigram') {
+						return ["Bhurungamari",
+						"Char Rajibpur",
+						"Chilmari",
+						"Kurigram Sadar",
+						"Nageshwari",
+						"Phulbari",
+						"Rajarhat",
+						"Raumari",
+						"Rk Road",
+						"Ulipur"]; // Example cities for Barisal state
+					}
+					else if (state === 'Kushtia') {
+						return ["Bheramara",
+						"Daulatpur",
+						"Khoksa",
+						"Kumarkhali",
+						"Kushtia Leaf Factory",
+						"Kushtia Sadar",
+						"M.m Hossain Road",
+						"Mirpur",
+						"Purba Majampur"
+					]; // Example cities for Barisal state
+					}
+					else if (state === 'Lakshmipur') {
+						return [ "Lakshmipur Sadar",
+						"Raipur",
+						"Ramganj",
+						"Ramgati"]; // Example cities for Barisal state
+					}
+					else if (state === 'Lalmonirhat') {
+						return ["Amtali",
+						"Hatibandha",
+						"Kaliganj",
+						"Lalmonirhat Sadar",
+						"Patgram"]; // Example cities for Barisal state
+					}
+					else if (state === 'Madaripur') {
+						return [ "Doctor Bari",
+						"Kalkini",
+						"Madaripur Sadar",
+						"Magura Sadar",
+						"Mohammadpur",
+						"Rajoir",
+						"Salikha",
+						"Shibchar",
+						"Sreepur"]; // Example cities for Barisal state
+					}
+					else if (state === 'Magura') {
+						return ["Ambalshwar",
+						"Arpara",
+						"Atharokhada",
+						"Babukhali",
+						"Balidia",
+						"Beroil Palita",
+						"Bgia",
+						"Binodepur",
+						"Bunagati",
+						"Chaulia",
+						"Dariapur",
+						"Dhaneshwargati",
+						"Digha",
+						"Gangarampur",
+						"Gayeshpur",
+						"Golapgram",
+						"Hazipur",
+						"Hazrapur",
+						"Jagdal",
+						"Kachuddi",
+						"Kadirpara",
+						"Kuchiamora",
+						"Magura Sadar",
+						"Moghi",
+						"Mohammadpur",
+						"Nahata",
+						"Nakol",
+						"Palashbaria",
+						"Raghobdair",
+						"Rajapur",
+						"Sabdalpur",
+						"Salikha",
+						"Satrujitpur",
+						"Shalikha",
+						"Shatakhali",
+						"Sreekol",
+						"Sreepur",
+						"Talkhari"]; // Example cities for Barisal state
+					}
+					else if (state === 'Manikganj') {
+						return ["Daulatpur",
+						"Ghior",
+						"Golora",
+						"Harirampur",
+						"Manikganj Sadar",
+						"Saturia",
+						"Sauta",
+						"Shibalaya",
+						"Singair"]; // Example cities for Barisal state
+					}
+					else if (state === 'Meherpur') {
+						return [ "Gangni",
+						"Meherpur Sadar",
+						"Pirozpur"]; // Example cities for Barisal state
+					}
+					else if (state === 'Moulvibazar') {
+						return ["Barlekha",
+						"Central Road",
+						"Chowmona",
+						"Court Road",
+						"Ghorua",
+						"Jagonnathpur",
+						"Kamalganj",
+						"Kolimabad",
+						"Kulaura",
+						"Lake Road",
+						"M.saifur Rahman Road",
+						"Madar Bari",
+						"Maulvi Bazar Sadar",
+						"Mission Road",
+						"Muslim Quarter",
+						"Rajnagar",
+						"Sreemangal",
+						"Syed Mostofa Road",
+						"Sylhet Road",
+						"Tb Hospital Road"]; // Example cities for Barisal state
+					}
+					else if (state === 'Munshiganj') {
+						return [ "Bikrampur",
+						"Gazaria",
+						"Lohajang",
+						"Malpara",
+						"Mathpara",
+						"Munshiganj Sadar",
+						"Ratanpur",
+						"Sirajdikhan",
+						"Sreenagar",
+						"Tongibari"]; // Example cities for Barisal state
+					}
+					else if (state === 'Mymensingh') {
+						return ["Bagmara",
+						"Bang. Agre.university",
+						"Bhaluka",
+						"Brahmapalli",
+						"Charpara",
+						"Db Road",
+						"Dhobaura",
+						"Fulbaria",
+						"Gaffargaon",
+						"Gauripur",
+						"Haluaghat",
+						"Hori Kishore Roy Road",
+						"Ishwarganj",
+						"Krbtopur",
+						"Maskanda Road",
+						"Mohammad Ali Road",
+						"Monmohon Neogi Rd",
+						"Muktagachha",
+						"Mymensingh Sadar",
+						"Naha Road",
+						"Nandail",
+						"Natunbazar",
+						"Nowmahal",
+						"Phulpur",
+						"R.k Mission Road",
+						"Senbari",
+						"Shankipara",
+						"Somvugonj",
+						"Trishal",
+						"Zila School Road"
+					]; // Example cities for Barisal state
+					}
+					else if (state === 'Naogaon') {
+						return ["Atrai",
+						"Badalgachhi",
+						"Dhamoirhat",
+						"Mahadevpur",
+						"Manda",
+						"Naogaon Sadar",
+						"Niamatpur",
+						"Patnitala",
+						"Porsha",
+						"Raninagar",
+						"Sapahar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Narail') {
+						return [ "Kalia",
+						"Lohagara",
+						"Narail Sadar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Narayanganj') {
+						return ["Amlapara",
+						"Araihazar",
+						"B.k Road",
+						"Babornl",
+						"Bandar",
+						"Bank Colony",
+						"Bbroad",
+						"Chashara",
+						"D.p Road",
+						"Deobhoge",
+						"Fatulla",
+						"H.m. Sen Road",
+						"Isdair",
+						"Isha Khan Road",
+						"Jalkuri",
+						"Jamtola",
+						"Jatramura",
+						"Kalir Bazar",
+						"Khanpur",
+						"Masdair",
+						"Mission Para",
+						"Mubarok Shah Road",
+						"N.s. Road",
+						"Nalua Road",
+						"Narsingdi",
+						"Naryanganj Sadar",
+						"Nawab Salimullah",
+						"Nimtola",
+						"Nondipara",
+						"Panchoboti",
+						"President Road",
+						"R.c Nag Road",
+						"R.k Mitra Road",
+						"Rupganj",
+						"S.m Malay Road",
+						"Santidara",
+						"Sayedpur",
+						"Siddirgonj",
+						"Sitalakha",
+						"Solimulla Road",
+						"Sonargaon",
+						"Sonatan Pal Lane",
+						"Tallah Road",
+						"Tank Road",
+						"Ukilpara"]; // Example cities for Barisal state
+					}
+					else if (state === 'Narsingdi') {
+						return ["Belabo",
+						"Brahmon Para",
+						"Kali Bari",
+						"Madhobi",
+						"Masimpur",
+						"Monohardi",
+						"Narsingdi Sadar",
+						"Palash",
+						"Raipura",
+						"Shibpur",
+						"West Dattapara"]; // Example cities for Barisal state
+					}
+					else if (state === 'Natore') {
+						return ["Bagatipara",
+						"Baraigram",
+						"Gurudaspur",
+						"Laksmanhati",
+						"Lalpur",
+						"Natore Sadar",
+						"Qadirabad",
+						"Singra",
+						"Station Bazar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Netrakona') {
+						return ["Atpara",
+						"Barhatta",
+						"Durgapur",
+						"Juge Court",
+						"Kalmakanda",
+						"Kendua",
+						"Khaliajuri",
+						"Madan",
+						"Mohanganj",
+						"Netrokona Sadar",
+						"Purbadhala"]; // Example cities for Barisal state
+					}
+					else if (state === 'Nilphamari') {
+						return [ "Dimla",
+						"Domar",
+						"Jaldhaka",
+						"Kishoreganj",
+						"Nilphamari Sadar",
+						"Saidpur"]; // Example cities for Barisal state
+					}
+					else if (state === 'Noakhali') {
+						return [ "Begumganj",
+						"Chandpur",
+						"Chatkhil",
+						"Chomuhani Bazar",
+						"Companiganj",
+						"Hatiya",
+						"Maijdeecourt",
+						"Master Para",
+						"Medical College",
+						"Noakhali Sadar",
+						"Senbagh",
+						"Shunaimuri",
+						"Sonapur"]; // Example cities for Barisal state
+					}
+					else if (state === 'Pabna') {
+						return ["A Hamid Road",
+						"Atgharia",
+						"Bera",
+						"Bhangura",
+						"Chatmohar",
+						"Faridpur",
+						"Ishwardi",
+						"Pabna Sadar",
+						"Santhia",
+						"Sujanagar",
+						"Zeibratory"]; // Example cities for Barisal state
+					}
+					else if (state === 'Panchagarh') {
+						return ["Atrai",
+						"Boda",
+						"Debiganj",
+						"Panchagarh Sadar",
+						"Tentulia"]; // Example cities for Barisal state
+					}
+					else if (state === 'Patuakhali') {
+						return ["Arambag",
+						"Bauphal",
+						"Dashmina",
+						"Galachipa",
+						"Kalapara",
+						"Mirzaganj",
+						"Patuakhali Sadar",
+						"Sadar Road",
+						"Water Works Road"
+					]; // Example cities for Barisal state
+					}
+					else if (state === 'Pirojpur') {
+						return ["Bhandaria",
+						"Kawkhali",
+						"Mathbaria",
+						"Nazirpur",
+						"Nesarabad",
+						"Pirojpur Sadar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Rajbari') {
+						return ["Baliakandi",
+						"Goalandaghat",
+						"Kazikanda",
+						"Pangsha",
+						"Rajbari Sadar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Rajshahi') {
+						return ["Bagha",
+						"Bagmara",
+						"Binodpur Bazar",
+						"Boalia",
+						"Boalia",
+						"Cantonement Road",
+						"Charghat",
+						"Darga Para",
+						"Durgapur",
+						"Ghas Para",
+						"Godagari",
+						"Kazla",
+						"Matihar",
+						"Mohanpur",
+						"Paba",
+						"Poba",
+						"Puthia",
+						"Rajpara",
+						"Rajshahi Govt. College",
+						"Rajshahi University",
+						"Raninagar",
+						"Sagarpara",
+						"Shah Mokdum",
+						"Sopura",
+						"Tanore"]; // Example cities for Barisal state
+					}
+					else if (state === 'Rangamati') {
+						return ["Baghaichhari",
+						"Barkal",
+						"Belaichhari",
+						"Juraichhari",
+						"Kaptai",
+						"Kawkhali",
+						"Langadu",
+						"Nannerchar",
+						"Rajasthali",
+						"Rangamati Sadar",
+						"Tablechari"]; // Example cities for Barisal state
+					}
+					else if (state === 'Rangpur') {
+						return ["Badarganj",
+						"Befpotfi",
+						"Borguna",
+						"Gangachara",
+						"Kaunia",
+						"Mithapukur",
+						"Pirgachha",
+						"Pirganj",
+						"R.k Road",
+						"Rangpur Sadar",
+						"Satzara",
+						"Taraganj"]; // Example cities for Barisal state
+					}
+					else if (state === 'Satkhira') {
+						return ["Assasuni",
+						"Debhata",
+						"Kalaroa",
+						"Kaliganj",
+						"Satkhira Sadar",
+						"Shyamnagar",
+						"Tala"]; // Example cities for Barisal state
+					}
+					else if (state === 'Shariatpur') {
+						return [ "Bhedarganj",
+						"Damudya",
+						"Damudya",
+						"Ghushirhut",
+						"Gosairhat",
+						"Kashipur",
+						"Naria",
+						"Shariatpur Sadar",
+						"Sundor Road",
+						"Zanjira"]; // Example cities for Barisal state
+					}
+					else if (state === 'Sherpur') {
+						return ["Jhenaigati",
+						"Nakla",
+						"Nalitabari",
+						"Sherpur Sadar",
+						"Sreebardi"]; // Example cities for Barisal state
+					}
+					else if (state === 'Sirajganj') {
+						return ["Belkuchi",
+						"Chauhali",
+						"Kamarkhanda",
+						"Kazipur",
+						"Raiganj",
+						"Shahjadpur",
+						"Sirajganj Sadar",
+						"Tarash",
+						"Ullahpara"]; // Example cities for Barisal state
+					}
+					else if (state === 'Sunamganj') {
+						return ["Bishwamvarpur",
+						"Chhatak",
+						"Derai",
+						"Dharmapasha",
+						"Dowarabazar",
+						"Jagannathpur",
+						"Jamalganj",
+						"Shantiganj",
+						"Sullah",
+						"Sunamganj Sadar",
+						"Tahirpur"]; // Example cities for Barisal state
+					}
+					else if (state === 'Sylhet') {
+						return ["Akalia",
+						"Ambarkhana",
+						"Bagan Bagicha",
+						"Bagbari",
+						"Balaganj",
+						"Baluchar",
+						"Baruthkhana",
+						"Bathalia",
+						"Beanibazar",
+						"Bhadeswar",
+						"Bharthokhola",
+						"Biazid Bostami Rd",
+						"Bibirhat",
+						"Bilpar",
+						"Bishwanath",
+						"Boiddaypara",
+						"Bondor Bazar",
+						"Borikandi",
+						"Boroshala",
+						"Chadni Ghat",
+						"Chalibandar",
+						"Chandboalia",
+						"Chandogram",
+						"Chandpur",
+						"Chara Dighir Par",
+						"Chatak",
+						"Chawkidekhi",
+						"Chiknagool",
+						"Chorar Phar",
+						"Choukidiki",
+						"Chowdheri",
+						"Chowhatta",
+						"Chowhattadi",
+						"Chowmohony",
+						"Circuit House",
+						"Companiganj",
+						"D.c.office",
+						"Dakshin Surma",
+						"Darga Gate",
+						"Darga Moholla",
+						"Daria Para",
+						"Dasura",
+						"Dhupadighir Uttarpar",
+						"Dottapara",
+						"Double Mooringslrand",
+						"East Subid Bazar",
+						"Fenchuganj",
+						"Ghurni",
+						"Goherpur",
+						"Golabganj",
+						"Gotatikor",
+						"Gousuddin Primary School",
+						"Gowainghat",
+						"Haripur",
+						"Hawrpara",
+						"Hobigonj",
+						"Housing Estate",
+						"Ibrahimpur",
+						"Islam Pur",
+						"Jaintiapur",
+						"Jalalabad",
+						"Jalalabad Cantt",
+						"Jalalabad Medical",
+						"Jallarpar",
+						"Jamtala",
+						"Jarjari Para",
+						"Jatorpur",
+						"Jerjeri Para",
+						"Jey Para",
+						"Jharnarpar",
+						"Jherjherypara",
+						"Jindabazar",
+						"Joynagar",
+						"Kadamtoli",
+						"Kajatshe",
+						"Kalighat",
+						"Kanaighat",
+						"Karar Para",
+						"Kazir Bazar",
+						"Kazitula",
+						"Kazol Shah",
+						"Khadim Nagar",
+						"Khadimpara",
+						"Khasdabir",
+						"Khuzar Kahola",
+						"Kotwali Sylhet",
+						"Kuarpar",
+						"Kulaura",
+						"Kumar Para",
+						"Lackatura Tea Estate",
+						"Lala Bazar",
+						"Laldighirpar",
+						"Lalkhan Bazar",
+						"Lamabazar",
+						"Lamai",
+						"Lamapara",
+						"Lechu Bagan",
+						"Luhar Para",
+						"M C College",
+						"Madanmohan College",
+						"Majortilla",
+						"Manik Pir Road",
+						"Mendibag",
+						"Miah Fazil Chist",
+						"Miapara",
+						"Mir Hazi Bagh",
+						"Mira Bazar",
+						"Mirabox Tola",
+						"Mirer Moydan",
+						"Mirja Jungle",
+						"Mirzapara",
+						"Modhu Shahid",
+						"Mohajonpotti",
+						"Mohampur",
+						"Mojumdari",
+						"Moluar Muk Bazar",
+						"Moulovibazar",
+						"Munshi Para",
+						"Naiorpur",
+						"Nasimpur",
+						"Nayorpul",
+						"Noluar Muk Bazar",
+						"North Baluchar",
+						"North Pir Moholla",
+						"Noya Sarak",
+						"Old Dohs",
+						"Old Market Colonee",
+						"Osmani Nagar",
+						"Pathan Tula",
+						"Patherghate",
+						"Payra Dorga",
+						"Pirmahalla",
+						"Ponitula",
+						"Proboth Pur",
+						"Pulerpur",
+						"Puranlane",
+						"Rajargoli",
+						"Ranaping",
+						"Razpura",
+						"Rengagongo Bazar",
+						"Rikabi Bazar",
+						"Roynogor",
+						"Sadar Thana",
+						"Sagor Dighir Par",
+						"Sali Bondor",
+						"Sekgat",
+						"Sersan Road",
+						"Shadipur",
+						"Shagordiggir Por",
+						"Shahi Eidgha",
+						"Shahjalal University",
+						"Shahjalal Uposhohor",
+						"Shajahanpur",
+						"Shaplabagh",
+						"Shayestagonj",
+						"Sheikhghat",
+						"Sherpur",
+						"Shibgonj",
+						"Shjalal Bridge Line",
+						"Shoging State",
+						"Showdagor Tula",
+						"Shunampur",
+						"Sobhani Ghat",
+						"Sonarpara",
+						"South Surma",
+						"Sreerampur",
+						"Srimongol",
+						"Subidbazar",
+						"Sunamgonj",
+						"Sunarpara",
+						"Supanighat",
+						"Supnighat Point",
+						"Surma",
+						"Sust",
+						"Sylhet Sadar",
+						"Taltola",
+						"Tamabil",
+						"Tatipara",
+						"Tilaghor",
+						"Tuker Bazar",
+						"Tultikor",
+						"Tupkhana",
+						"Uposhohor",
+						"Uttar Phir Moholla",
+						"Uttarkhan",
+						"Vartokalla",
+						"West Borikand",
+						"West Pirmahalla",
+						"West Subid Bazar",
+						"Womens Medical Colllege",
+						"Zakiganj",
+						"Zindabazar"]; // Example cities for Barisal state
+					}
+					else if (state === 'Tangail') {
+						return [ "Basail",
+						"Bhuapur",
+						"Biswas Betya",
+						"Buspara",
+						"Delduar",
+						"Ghatail",
+						"Gopalpur",
+						"Kaliakur",
+						"Kalihati",
+						"Madhupur",
+						"Mirzapur",
+						"Nagarpur",
+						"Sakhipur",
+						"Tangail Sadar",
+						"Thana Para",
+						"Victoriya Road"]; // Example cities for Barisal state
+					}
+					else if (state === 'Thakurgaon') {
+						return [ "Baliadangi",
+						"Haripur",
+						"Pirganj",
+						"Ranisankail",
+						"Thakurgaon Sadar"]; // Example cities for Barisal state
+					}
+
+					// Add conditions for other states as needed
+					return [];
+				}
+			
+				// Dummy function to simulate fetching thanas for a city
+				
+			});
+			</script>
+
+			<!-- form address choice -->
+
+		
+		<script>
+			//for payment handle 
+			function handlePaymentTypeChange(checkbox) {
+				var checkboxes = document.getElementsByName("payment_type");
+				checkboxes.forEach(function(item) {
+					if (item !== checkbox) {
+						item.checked = false;
+					}
+				});
+				if (checkbox.value === "online") {
+					document.getElementById("send_phone_number").setAttribute("required", "true");
+					document.getElementById("transaction_number").setAttribute("required", "true");
+				} else {
+					document.getElementById("send_phone_number").removeAttribute("required","false");
+					document.getElementById("transaction_number").removeAttribute("required", "false");
+				}
+			}
+		</script>
+		<script>
+			// for unique check button choice of location
+			function handleLocationCheckboxChange(checkbox) {
+				if (checkbox.checked) {
+					var checkboxes = document.getElementsByName("location");
+					checkboxes.forEach(function (cb) {
+						if (cb !== checkbox) {
+							cb.checked = false;
+						}
+					});
+				}
+			}
+		</script>
+
+
+
+<script>
+    // Function to load cart data and update modal content
+    function loadCartData() {
+        // Retrieve cart items from localStorage
+        var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Calculate subtotal excluding delivery charge and online payment charge
+        var subtotal = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+        
+        // Display cart item count
+        document.getElementById('cartItemCount').innerText = cartItems.length + ' ITEMS';
+
+        // Function to calculate and update the amounts
+        function updateAmounts() {
+            // Get the selected city
+            var selectedCity = document.querySelector('select[name="city"]').value;
+            var deliveryCharge = selectedCity === 'Dhaka' ? 70 : 130;
+
+            // Get the online payment checkbox value
+            var onlinePaymentCheckbox = document.querySelector('input[name="payment_typeOnline"]');
+            var paymentCharge = onlinePaymentCheckbox.checked ? subtotal * 0.02 : 0;
+
+            // Calculate order total including delivery charge, discount, and online payment charge
+            var orderTotal = subtotal + deliveryCharge + paymentCharge;
+            var discount = 0; // Discount is 0 because we are not rounding the order total
+
+            // Display subtotal excluding delivery charge and online payment charge
+            document.getElementById('subtotal').innerText =  subtotal.toFixed(2) ;
+            
+            // Display delivery charge, online payment charge, discount, and order total
+            document.getElementById('deliveryCharge').innerText = deliveryCharge.toFixed(2);
+            document.getElementById('onlinePaymentCharge').innerText =  paymentCharge.toFixed(2);
+            document.getElementById('discount').innerText =  discount.toFixed(2);
+            document.getElementById('orderTotal').innerText =  orderTotal.toFixed(2);
+            document.getElementById('orderTotalSend').value = orderTotal.toFixed(2) ;
+        }
+
+        // Call updateAmounts initially
+        updateAmounts();
+
+        // Attach event listeners to city dropdown and online payment checkbox
+        var cityDropdown = document.querySelector('select[name="city"]');
+        cityDropdown.addEventListener('change', updateAmounts);
+
+        var onlinePaymentCheckbox = document.querySelector('input[name="payment_typeOnline"]');
+        onlinePaymentCheckbox.addEventListener('change', updateAmounts);
+    }
+
+    // Call loadCartData function when the page loads
+    window.addEventListener('load', loadCartData);
+</script>
+
+		
+		
+		
+		
+		
+		
+
+
+		  <!-- send values to the order table -->
+		  <script>
+			$(document).ready(function() {
+				var cartItemsJson = localStorage.getItem('cart');
+
+				// Parse the JSON string into an array of objects
+				var itemsArray = JSON.parse(cartItemsJson);
+		
+				// Filter and format the data
+				var formattedItems = itemsArray.map(function(item) {
+					return 'product-ID: ' + item.productId + ', Name: ' + item.name + ', Color: ' + item.color + ', Size: ' + item.size + ', Price: ' + item.price +', Quantity: '+item.quantity +'   \n'			});
+		
+				// Convert the array into a formatted string
+				var itemsJson = formattedItems.join('');
+		
+				// Set the formatted string as the value of the hidden input field
+				$('#itemsJson').val(itemsJson);
+			});
+		  </script>
+
+		  
+		  <script>
+			  document.addEventListener("DOMContentLoaded", function() {
+				  // Check if there's saved order information when the page loads
+				  var savedOrderInfo = JSON.parse(localStorage.getItem('savedOrderInfo'));
+				  if (savedOrderInfo) {
+					  // If saved order information exists, fill the form fields with the saved data
+					  document.querySelector('select[name="city"]').value = savedOrderInfo.city;
+					  document.querySelector('select[name="thana"]').value = savedOrderInfo.thana;
+					  document.querySelector('textarea[name="address"]').value = savedOrderInfo.address;
+					  document.querySelector('input[name="payment_type"][value="' + savedOrderInfo.paymentType + '"]').checked = true;
+					  document.getElementById('send_phone_number').value = savedOrderInfo.sendPhoneNumber;
+					  document.getElementById('transaction_number').value = savedOrderInfo.transactionNumber;
+				  }
+		  
+				  // Add an event listener to the checkbox
+				  document.getElementById('saveOrderInfo').addEventListener('change', function() {
+					  // Check if the checkbox is checked
+					  if (this.checked) {
+						  // If checked, collect the order information
+						  var orderInfo = {
+							  city: document.querySelector('select[name="city"]').value,
+							  thana: document.querySelector('select[name="thana"]').value,
+							  address: document.querySelector('textarea[name="address"]').value,
+							  paymentType: document.querySelector('input[name="payment_type"]:checked').value,
+							  sendPhoneNumber: document.getElementById('send_phone_number').value,
+							  transactionNumber: document.getElementById('transaction_number').value
+						  };
+		  
+						  // Store the order information in the local storage
+						  localStorage.setItem('savedOrderInfo', JSON.stringify(orderInfo));
+					  } else {
+						  // If not checked, remove the saved order information from the local storage
+						  localStorage.removeItem('savedOrderInfo');
+					  }
+				  });
+			  });
+		  </script>
+		  
+		  <script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Select the "Confirm Order" button
+				var confirmOrderBtn = document.getElementById('confirmOrderBtn');
+				
+				// Add click event listener to the "Confirm Order" button
+				confirmOrderBtn.addEventListener('click', function(event) {
+					// Clear the cart in localStorage
+					localStorage.removeItem('cart');
+				});
+			});
+		</script>
+		
+
+
+		{% endblock body %}

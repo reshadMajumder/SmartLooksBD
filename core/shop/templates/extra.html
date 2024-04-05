@@ -1,0 +1,178 @@
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var addToCartButtons = document.querySelectorAll('.btn-ecomm');
+      addToCartButtons.forEach(function(button) {
+          button.addEventListener('click', function(event) {
+              event.preventDefault();
+              var productInfoSection = this.closest('.product-info-section');
+              var product = {
+                  productId: "{{ product.id }}",
+                  name: "{{ product.name }}",
+                  price: {{ product.price }},
+                  quantity: parseInt(productInfoSection.querySelector('.quantity-input').value),
+                  imagePath: "{{ image_url }}",
+                  size: "{% if product.size.all %}" + productInfoSection.querySelector('.form-select').value + "{% else %}no{% endif %}",
+                  color: "{% if product.color.all %}" + productInfoSection.querySelector('input[name="color"]:checked').value + "{% else %}no{% endif %}"
+              };
+              
+              if (product.size === 'no' || product.color === 'no') {
+                  alert('Please select size and color before adding to cart.');
+              } else {
+                  addToCart(product);
+              }
+          });
+      });
+      
+      function addToCart(product) {
+          var cart = JSON.parse(localStorage.getItem('cart')) || [];
+          cart.push(product);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          
+          // Construct alert message with product details
+          var alertMessage = 'Product added to cart:\n' +
+                             'Product ID: ' + product.productId + '\n' +
+                             'Name: ' + product.name + '\n' +
+                             'Price: ' + product.price + '\n' +
+                             'Quantity: ' + product.quantity + '\n' +
+                             'Size: ' + product.size + '\n' +
+                             'Color: ' + product.color + '\n' +
+                             'Image Path: ' + product.imagePath;
+                             
+          alert(alertMessage);
+        }
+  
+  
+        
+  
+  
+  });
+  </script>
+
+
+
+
+
+//from before
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var addToCartButtons = document.querySelectorAll('.btn-ecomm');
+        addToCartButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                var productInfoSection = this.closest('.product-info-section');
+                var product = {
+                    productId: {{ product.id }},
+                    name: "{{ product.name }}",
+                    price: {{ product.price }},
+                    color: "",
+                    quantity: parseInt(productInfoSection.querySelector('.quantity-input').value),
+                    size: productInfoSection.querySelector('.form-select').value,
+                    imagePath: "{{ image_url }}"
+                };
+  
+                // Find the selected color
+                var selectedColor = productInfoSection.querySelector('input[name="color"]:checked');
+                if (selectedColor) {
+                    product.color = selectedColor.value;
+                } else {
+                  alert("Please select a color");
+                  return;
+                    
+                }
+  
+                addToCart(product);
+            });
+        });
+  
+        function addToCart(product) {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            var existingProductIndex = cart.findIndex(function(item) {
+                return item.productId === product.productId && item.size === product.size && item.color === product.color;
+            });
+  
+            if (existingProductIndex !== -1) {
+                // If product already exists, update quantity
+                cart[existingProductIndex].quantity = product.quantity;
+            } else {
+                // Otherwise, add new product to cart
+                cart.push(product);
+            }
+  
+            localStorage.setItem('cart', JSON.stringify(cart));
+  
+            // Update cart details in the dropdown menu
+            updateCartDetails(cart);
+  
+            // Construct alert message with product details
+  
+        }
+  
+        // Function to update cart details in the dropdown menu
+        function updateCartDetails(cart) {
+          var cartItemCount = 0;
+          var cartTotalPrice = 0;
+      
+          var cartListElement = document.getElementById('cartItems');
+          cartListElement.innerHTML = '';
+      
+          // Limit the number of items displayed to maximum 3
+          var maxItems = Math.min(cart.length, 3);
+          for (var i = 0; i < maxItems; i++) {
+              var item = cart[i];
+              var totalPriceForItem = item.price * item.quantity;
+      
+              var cartItemHTML = `
+                  <a class="dropdown-item" href="javascript:;">
+                      <div class="d-flex align-items-center">
+                          <div class="flex-grow-1">
+                              <h6 class="cart-product-title">${item.name}</h6>
+                              <p class="cart-product-price">${item.quantity} X ৳${item.price.toFixed(2)}</p>
+                          </div>
+                          <div class="position-relative">
+                         
+                              <div class="cart-product">
+                                  <img src="${item.imagePath}" class="" alt="product image"/>
+  
+                              </div>
+                              
+                          </div>
+                      </div>
+                  </a>
+              `;
+              cartListElement.insertAdjacentHTML('beforeend', cartItemHTML);
+      
+              cartItemCount += item.quantity;
+              cartTotalPrice += totalPriceForItem;
+          }
+      
+          // If there are more than 4 items, display a hint
+          if (cart.length > 3) {
+              var hintMessage = document.createElement('p');
+              hintMessage.classList.add('text-muted', 'mb-0');
+              hintMessage.innerText = ' And ' + (cart.length - 3) + ' more items...';
+              cartListElement.appendChild(hintMessage);
+          }
+      
+          // Update total number of items in the cart Live
+          document.getElementById('cartItemCount').textContent = cartItemCount + ' ITEMS';
+          document.getElementById('cartItemNumberCount').textContent = cart.length ;
+          // Update total price of items in the cart
+          document.getElementById('cartTotalPrice').textContent = '৳ ' + cartTotalPrice;
+      }
+      
+  
+        // Call the function to update cart details initially
+        updateCartDetails(JSON.parse(localStorage.getItem('cart')) || []);
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+ 

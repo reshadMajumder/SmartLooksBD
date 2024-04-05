@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %} Cart {% endblock title %}
+
+{% block body %}
+{% load static %}
+
+<!--start page wrapper -->
+<div class="page-wrapper">
+  <div class="page-content">
+    <div class="separator p-4">
+      <div class="line"></div>
+      <h4 class="mb-0 fw-bold separator-title"><b>Cart</b></h4>
+      <div class="line"></div>
+    </div>
+    <!--start shop cart-->
+    <section class="py-4">
+      <div class="container">
+ 
+        <div class="shop-cart">
+          <div class="row justify-content-center">
+            <div class="col-12 col-xl-8">
+              <div class="shop-cart-list mb-3 p-3" id="cartList">
+                <!-- Cart items will be dynamically added here -->
+              </div>
+
+              <hr />
+
+              <div class="d-lg-flex align-items-center gap-2">
+                <a href="{% url "home" %} " class="btn btn-dark btn-ecomm">
+                  <i class="bx bx-shopping-bag"></i> Continue Shopping
+                </a>
+                <a href="javascript:;" class="btn btn-light btn-ecomm ms-auto" id="clearCartBtn">
+                  <i class="bx bx-x-circle"></i> Clear Cart
+                </a>
+                <a href="{% url "cart" %} " class="btn btn-white btn-ecomm" id="updateCartBtn">
+                  <i class="bx bx-refresh"></i> Update Cart
+                </a>
+              </div>
+
+              <br><br>
+              <hr>
+
+              <div class="card-body">
+                <p class="mb-2">Subtotal: <span class="float-end" id="subtotal">0.00 TK</span></p>
+                <div class="my-3 border-top"></div>
+                <h5 class="mb-0">Order Total: <span class="float-end" id="orderTotal">0.00 TK</span></h5>
+                <div class="my-4"></div>
+                <div class="d-grid">
+                  <a href="{% url "checkOut" %} " class="btn btn-dark btn-ecomm">Proceed to Checkout</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end row-->
+        </div>
+
+      </div>
+    </section>
+    <!--end shop cart-->
+  </div>
+</div>
+<!--end page wrapper -->
+
+
+
+{% endblock body %}

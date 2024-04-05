@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock title %}
+
+{% block body %}
+
+  {% load static %}
+
+
+      <!--start slider section-->
+      <section class="slider-section mb-4">
+        <div class="first-slider p-0">
+          <div class="banner-slider owl-carousel owl-theme">
+
+            {% for banner in banner  %}
+            <div class="item">
+              <div class="position-relative">
+                <div
+                
+                  class="position-absolute top-50 slider-content translate-middle"
+                >
+                  {% if banner.headline %}
+                  <h3 class="h3 fw-bold d-none d-md-block">{{banner.headline}} </h3>
+
+                  {% endif %}
+
+                  {% if banner.content %}
+
+                  <h1 class="h1 fw-bold">{{banner.content}}</h1>
+                  {% endif %}
+
+                  {% if banner.offer %}
+                  <p class="fw-bold text-dark d-none d-md-block">
+
+                    <i>{{banner.offer}} </i>
+                  </p>
+                  {% endif %}
+
+                </div>
+                <a href="javascript:;">
+                  <img
+                    src="/media/{{banner.image_one}}"
+                    class="img-fluid"
+                    alt="..."
+                  />
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </section>
+      <!--end slider section-->
+
+      <div class="separator p-4">
+        <div class="line"></div>
+        <h4 class="mb-0 fw-bold separator-title"><b>Featured Section</b></h4>
+        <div class="line"></div>
+      </div>
+      <!--start page wrapper -->
+      <div class="page-wrapper">
+        <section class="py-4">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-xl-12">
+                <div class="product-wrapper">
+                  <div
+                    class="toolbox d-flex align-items-center mb-3 gap-2 border p-3"
+                  >
+                   
+                  <div class="d-flex flex-wrap">
+                    <div class="d-flex align-items-center flex-nowrap">
+                        <p class="mb-0 font-13 text-nowrap">Sort By:</p>
+                        <select class="form-select ms-3 rounded-0" onchange="sortProducts(this)">
+                            <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Sort by New</option>
+                            <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Sort by price: low to high</option>
+                            <option value="price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Sort by price: high to low</option>
+                        </select>
+                    </div>
+                  </div>
+
+                
+                  </div>
+
+
+                  <!-- product start -->
+                  <div class="product-grid">
+                    <div class="row row-cols-2 row-cols-md-4 g-3 g-sm-4">
+                      {% for product in products %}
+                      {% if not product.inStock %}
+
+                          <div class="col">
+                              <div class="card position-relative disabled">
+                                  <div class="position-relative overflow-hidden">
+                                      <div class="quick-view position-absolute start-0 bottom-0 end-0"> 
+                                          <a href="#">Buy Now</a> 
+                                      </div>
+                                          <img src="/media/{{ product.photo }}" class="img-fluid zoom-in" alt="img of {{ product.name }}" />
+                                              <span class="badge bg-danger position-absolute top-50 start-50 translate-middle" style="font-size: 20px;">Stock Out</span>
+                                      {% if product.price_difference_percentage %}
+                                          <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 mt-2 me-2">
+                                              -{{ product.price_difference_percentage }}%
+                                          </span>
+                                      {% endif %}
+                                  </div>
+                                  <div class="card-body px-0">
+                                      <div class="d-flex align-items-center justify-content-center">
+                                          <div>
+                                              <h6 class="mb-0 fw-bold product-short-title">{{ product.name }}</h6>
+                                          </div>
+                                      </div>
+                                      {% if product.dummyPrice %}
+                                          <div class="product-price d-flex align-items-center justify-content-center gap-2 mt-2">
+                                              <div class="h6 fw-bold disabled">{{ product.dummyPrice }}TK</div>
+                                              <div class="h6 fw-bold text-danger">{{ product.price }}TK</div>
+                                          </div>
+                                      {% else %}
+                                          <div class="product-price d-flex align-items-center justify-content-center gap-2 mt-2">
+                                              <div class="h6 fw-bold text-danger">{{ product.price }}TK</div>
+                                          </div>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                          </div>
+                          {% else %}
+                          
+                          <div class="col">
+                              <div class="card position-relative">
+                                  <div class="position-relative overflow-hidden">
+                                      <div class="quick-view position-absolute start-0 bottom-0 end-0"> 
+                                          <a href="{% url "productDetails" product.id %}">Buy Now</a> 
+                                      </div>
+                                      <a href="{% url "productDetails" product.id %}">
+                                          <img src="/media/{{ product.photo }}" class="img-fluid zoom-in" alt="img of {{ product.name }}" />
+                                
+                                      </a>
+                                      {% if product.price_difference_percentage %}
+                                          <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 mt-2 me-2">
+                                              -{{ product.price_difference_percentage }}%
+                                          </span>
+                                      {% endif %}
+                                  </div>
+                                  <div class="card-body px-0">
+                                      <div class="d-flex align-items-center justify-content-center">
+                                          <div>
+                                              <h6 class="mb-0 fw-bold product-short-title">{{ product.name }}</h6>
+                                          </div>
+                                      </div>
+                                      {% if product.dummyPrice %}
+                                          <div class="product-price d-flex align-items-center justify-content-center gap-2 mt-2">
+                                              <div class="h6 fw-bold disabled">{{ product.dummyPrice }}TK</div>
+                                              <div class="h6 fw-bold text-danger">{{ product.price }}TK</div>
+                                          </div>
+                                      {% else %}
+                                          <div class="product-price d-flex align-items-center justify-content-center gap-2 mt-2">
+                                              <div class="h6 fw-bold text-danger">{{ product.price }}TK</div>
+                                          </div>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                          </div>
+                          {% endif %}
+
+                      {% endfor %}
+                  </div>
+                    <!--end row-->
+                  </div>
+                  
+
+                </div>
+              </div>
+            </div>
+
+            <!--end row-->
+          </div>
+        </section>
+      </div>
+
+{% endblock body %}

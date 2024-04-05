@@ -1,0 +1,834 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--favicon-->
+    <link rel="icon" href="{% static "images/icons/sl.png" %} " type="image/png" />
+    <!--plugins-->
+    <link href="{% static "plugins/OwlCarousel/css/owl.carousel.min.css" %} "rel="stylesheet"/>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link
+      href="{% static "plugins/perfect-scrollbar/css/perfect-scrollbar.css" %} "rel="stylesheet"/>
+    <!-- loader-->
+    <link href="{% static "css/pace.min.css" %} " rel="stylesheet" />
+    <script src="{% static "js/pace.min.js" %} "></script>
+    <!-- Bootstrap CSS -->
+    <link href="{% static "css/bootstrap.min.css" %} " rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- extarnal css carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="{% static "css/app.css" %} " rel="stylesheet" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link href="{% static "css/icons.css" %} " rel="stylesheet" />
+    <title>{% block title %}{% endblock title %}-SmartLooksBD</title>
+  </head>
+
+  <body>
+    
+
+    <!--wrapper-->
+    <div class="wrapper">
+      <!--start top header wrapper-->
+      <div class="header-wrapper">
+        <div class="header-content bg-dark">
+          <div class="container">
+            <div class="row align-items-center gx-4">
+              <div class="col-auto">
+                <div class="d-flex align-items-center gap-3">
+                  <div
+                    class="mobile-toggle-menu d-inline d-xl-none d-lg-none"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar"
+                  >
+                    <img
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAGRJREFUSEvtk1kOABAQQ/Vgbu9e49sSo5lUQvguXV4giQ/E76dv4C58fiIzMzfWQgCgCT00kBtE0s/unmcgb8Ay6KH2AcOQaQP5RPcbOJAzgMK0ZCHHDZh0O9oHf/JObUZz/0QVtgcaGa1XxmsAAAAASUVORK5CYII="
+                    />
+                  </div>
+                  <div class="logo">
+                    {% if shop_info %}
+
+                    <a href="{% url "home" %} ">
+                      <img
+                        src="/media/{{shop_info.logo}}"
+                        class="logo-icon"
+                        alt=""
+                      />
+                    </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl order-4 order-xl-0">
+                <div
+                  class="display-flex align-items-center justify-content-end gap-3 d-none d-sm-block"
+                >
+                  <ul class="flex-container ulmenu">
+                    <li><a href="{% url "home" %} ">Home</a></li>
+                    <li><a href="{% url "man" %} ">Man</a></li>
+                    <li><a href="{% url "women" %} ">Women</a></li>
+                    <li><a href="{% url "accessories" %} ">Accessories</a></li>
+                    <li><a href="{% url "others" %} ">Others</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-auto ms-auto">
+                <div class="top-cart-icons">
+                  <nav class="navbar navbar-expand">
+                    <ul class="navbar-nav">
+                      <li class="nav-item dropdown dropdown-large">
+                        <a
+                          href="#"
+                          class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative cart-link"
+                          data-bs-toggle="dropdown"
+                        >
+                          <p class="alert-count" id="cartItemNumberCount">0 </p>
+                          <img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWBJREFUSEu9lS8sRVEcxz9fm6LaTJVtJr4mCYokvCIbgoJp3otGxF5RFBMkRRA0E42iSjZFkWx+zrF77bjv/r+uU+7O+Z3z/Zzfv3NFy0Mt6/N/ADOzyJt34ETSxl949+NBAIh15yVdN4UMhcjMtoE94FLSYhuAceAFGAGmJD03gaQm2cxOgeUGwveSZv35LEAHuG0AeJA0kwnwBjN7BKbTIJK+L5ZSGPH2HUk+j9l9YGYrwKAG4NOdm5T0WgQYA/wm//01Cjy4krQQH8jtZDM7dJD1QL3nxPshzYVp1817wVpX0nlZgM+Bz0U4tiQdRDnYBPYD4xswIemjFCASuQHmkpBoHor7pYGk1XBv4WNnZl3grGTJdlz876oCRoEn39UFkAtJS0MFUfJmtbcVhijKwxGw5hJ47Oo7rCrfbJm23D5IlGL8ryDugdgednPSVgXQrge1E5D3FjURrVSmTUFfASN8GYI2ZvsAAAAASUVORK5CYII="
+                          />
+                        </a>
+
+                        <!-- cart modal start-->
+                        <div class="dropdown-menu dropdown-menu-end "style="max-width: 300px; overflow-y: auto;" >
+                          <a href="{% url "cart" %}">
+                              <div class="cart-header">
+                                  <p class="cart-header-title mb-0" id="cartItemCount">0 ITEMS</p>
+                                  <p class="cart-header-clear ms-auto mb-0">VIEW CART</p>
+                              </div>
+                          </a>
+                          <div class="cart-list" id="cartItems">
+                              <!-- Cart items will be dynamically added here -->
+                          </div>
+                          <a href="javascript:;">
+                              <div class="text-center cart-footer d-flex align-items-center">
+                                  <h5 class="mb-0">TOTAL</h5>
+                                  <h5 class="mb-0 ms-auto" id="cartTotalPrice">৳0.00</h5>
+                              </div>
+                          </a>
+                          <div class="d-grid p-3 border-top">
+                              <a href="{% url "cart" %}" class="btn btn-dark "> CHECKOUT</a>
+                          </div>
+                      </div>
+                            <!-- caet modal end-->
+
+                      </li>
+                      {% if user.is_authenticated %}
+
+                      <li class="nav-item">
+                        <a href="{% url "logout" %} " class="nav-link cart-link"
+                          > <img height=20,weidth=20
+                            src="{% static "images/icons/logout.png" %}"
+                        /></a>
+                      </li>
+                      {%  else  %}
+                      <li class="nav-item">
+                        <a href="{% url "login" %} " class="nav-link cart-link"
+                          ><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAchJREFUSEu1lTtPVUEUhb8VaxOJRo1EGwosrfgBxhcaSyFW/AITgiRYGeiESLSwpwUt1Uh4WdraGQsaDChGo1FLyPLsZCDXwx3mesidds5e336s2Ud0+ajL+nQEsH27SmQS6EsJrQMPJb0uJVgE2J4AHmWExiXNHgY5FGD7OrAIfAECtJTErgHTwFngiqTVHKQEWA4BYFjS81YR20PAAvBG0s2mgB/ACeC4pD81wEngG7AlqbcpYBs4DZyS9D0D2JYUrWp7Si2Knl8FhiS9yLRoUdJgU0DrkMeBmMmxBJ0BzhxpyJGV7TEgxEK49ewCYdOnjW26F2i7H7gPhD13gLVq8LOSPh75oZUESvfZIdsOe0bWA8Cl5KZWva/Ae+BdquZ3O1hbgO1wxVwaYinJuN8CRiSt1D8+ALB9C3iVPnwJTAHrkn7WbBoVxvKL+4iJMygpVsv++Qdgu6daCx9S5tOSHnSSvu3HqZ2fgYuSfu3F1QGjwBPgraTLnYgnK4dOPMrYW/ckPcsBYqHdKT2edmDbN2LxVRXMV/a9mwNsAOeBnnrPS9XYPgdsAp8kXcgBHBeSij+iTBUH4hsJlarJuuh/Ajv9tusV/AXpWpsZNntrxAAAAABJRU5ErkJggg=="
+                        /></a>
+                      </li>
+
+                      {% endif %}
+
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <!--end row-->
+          </div>
+        </div>
+        <div class="primary-menu">
+          <nav class="navbar w-100 navbar-dark container mb-0 p-0">
+            <div
+              class="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasNavbar"
+            >
+              <div class="offcanvas-header">
+                <div class="offcanvas-logo">
+                  <img src="{% static "images/logo-icon.png" %} " width="100" alt="" />
+                </div>
+                <button
+                  type="button"
+                  class="btn-close text-reset"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body primary-menu menutextcolor">
+                <ul class="navbar-nav justify-content-center flex-grow-1 gap-1">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "home" %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "man" %}">Mens</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "women" %} ">Womens</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "accessories" %}">Accessories</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "others" %}">Others</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!--end top header wrapper=========================================================================================================-->
+{% block body %}
+
+
+
+      <!-- ============================================== end body start r=========================================================================================================-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <!-- ============================================== end body end r=========================================================================================================-->
+
+
+
+{% endblock body %}
+<a href="https://wa.me/+8801627076527?text=I'm%20interested%20in%20your%20product" target="_blank" class="wp_text">
+
+  <img src="{% static "images/icons/wpapp.png" %}" alt="whatsapp Logo">
+  <h6>Hello..!!</h6>
+  <a/>
+<!-- back to top btn-->
+<button onclick="topFunction()" id="backToTopBtn">
+  <img src="{% static "images/icons/top.png" %}" alt="Logo" width="60px" height="60px"/>
+</button>
+<!-- back to top btn-->
+
+<!-- Footer start -->
+<footer>
+    <section class="py-5 border-top bg-light">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+          <div class="col">
+            <div class="footer-section1 ">
+              <h5 class="mb-4 text-uppercase fw-bold">Contact Info</h5>
+              {% if shop_info %}
+
+              <div class="address mb-3">
+                <h6 class="mb-0 text-uppercase fw-bold">Address</h6>
+                <p class="mb-0">{{ shop_info.Address }}</p>
+              </div>
+              <div class="phone mb-3">
+                <h6 class="mb-0 text-uppercase fw-bold">Phone</h6>
+                <p class="mb-0">Mobile : {{ shop_info.Phone }}</p>
+              </div>
+              <div class="email mb-3">
+                <h6 class="mb-0 text-uppercase fw-bold">Email</h6>
+                <p class="mb-0">{{ shop_info.Email }}</p>
+              </div>
+              <div class="working-days mb-3">
+                <h6 class="mb-0 text-uppercase fw-bold">WORKING DAYS</h6>
+                <p class="mb-0">{{ shop_info.WorkingHour }}</p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col">
+            <div class="footer-section2">
+              <h5 class="mb-4 text-uppercase fw-bold">Categories</h5>
+              <ul class="list-unstyled">
+                <li class="mb-1">
+                  <a href="{% url "man" %} "
+                    ><i class="bx bx-chevron-right"></i> Man</
+                  >
+                </li>
+                <li class="mb-1">
+                  <a href="{% url "women" %} "
+                    ><i class="bx bx-chevron-right"></i> Women</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a href="{% url "accessories" %} "
+                    ><i class="bx bx-chevron-right"></i> Accessories</a
+                  >
+                </li>
+
+                <li class="mb-1">
+                  <a href="{% url "others" %} "
+                    ><i class="bx bx-chevron-right"></i> Others</a
+                  >
+                </li>
+
+
+              </ul>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="footer-section4">
+              <h5 class="mb-4 text-uppercase fw-bold">Stay informed</h5>
+              <div class="subscribe">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Your Email"
+                />
+                <div class="mt-3 d-grid">
+                  <a href="javascript:;" class="btn btn-dark btn-ecomm"
+                    >Subscribe</a
+                  >
+                </div>
+                <p class="mt-3 mb-0">
+                  Subscribe to our newsletter to receive early discount
+                  offers, updates and new products info.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end row-->
+      </div>
+    </section>
+
+    <section
+      class="footer-strip text-center py-3 border-top positon-absolute bottom-0"
+    >
+      <div class="container">
+        <div
+          class="d-flex flex-column flex-lg-row align-items-center gap-3 justify-content-between"
+        >
+          <p class="mb-0">Copyright © 2022. All right reserved.</p>
+
+          <div class="payment-icon">
+            <div class="row row-cols-auto g-2 justify-content-end">
+              <div class="col">
+                <a href="https://www.facebook.com/smartlooksbd1?mibextid=ZbWKwL"><img src="{% static "images/icons/facebook.png"%} " alt="footer payment logo" /><a>
+                <a href="https://youtube.com/@Smartlooksbd"><img src="{% static "images/icons/youtube.png"%} " alt="footer payment logo" /><a>
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-icon">
+            <div class="row row-cols-auto g-2 justify-content-end">
+              <div class="col">
+                <img src="{% static "images/icons/bkash.png" %} " alt="footer payment logo" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
+  <!--end footer section-->
+
+  <!--start quick view product-->
+  <!-- Modal -->
+
+  <!--end quick view product-->
+
+</div>
+<!--end wrapper-->
+
+<!-- Bootstrap JS -->
+
+
+<script src="{% static "js/bootstrap.bundle.min.js" %} "></script>
+<!--plugins-->
+<script src="{% static "js/jquery.min.js" %} "></script>
+<script src="{% static "plugins/OwlCarousel/js/owl.carousel.min.js" %} "></script>
+<script src="{% static "plugins/OwlCarousel/js/owl.carousel2.thumbs.min.js" %} "></script>
+<script src="{% static "plugins/perfect-scrollbar/js/perfect-scrollbar.js" %} "></script>
+<!--app JS-->
+<script src="{% static "js/app.js" %} "></script>
+<script src="{% static "js/index.js" %} "></script>
+
+
+<script > 
+  // Get the back to top  button:
+let mybutton = document.getElementById("backToTopBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;            // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+
+
+
+
+<!-- adding product info to local storage and showing the cart items in the cart logo modal start -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var addToCartButtons = document.querySelectorAll('.btn-ecomm');
+    addToCartButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            var productInfoSection = this.closest('.product-info-section');
+            var selectedColor = productInfoSection.querySelector('input[name="color"]:checked');
+            var selectedSize = productInfoSection.querySelector('.form-select');
+            
+            // Check if color is available but not selected
+            if (selectedColor === null && productInfoSection.querySelector('input[name="color"]') !== null) {
+                alert('Please select a Color & Size.');
+                return;
+            }
+
+            // Check if size is not available
+            var sizeValue = selectedSize !== null ? selectedSize.value : 'No';
+            
+            var product = {
+                productId: "{{ product.id }}",
+                name: "{{ product.name }}",
+                price: {{ product.price }},
+                quantity: parseInt(productInfoSection.querySelector('.quantity-input').value),
+                imagePath: "{{ image_url }}",
+                size: sizeValue,
+                color: selectedColor !== null ? selectedColor.value : 'No'
+            };
+            
+            addToCart(product);
+    
+            window.location.reload(); 
+            
+        });
+    });
+    
+    function addToCart(product) {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        var existingProductIndex = cart.findIndex(function(item) {
+            return item.productId === product.productId && item.size === product.size && item.color === product.color;
+        });
+
+        if (existingProductIndex !== -1) {
+            // Merge products with the same productId, size, and color
+            cart[existingProductIndex].quantity = product.quantity;
+        } else {
+            // Add new product to cart
+            cart.push(product);
+        }
+        // Set timestamp for cart
+        var currentTime = new Date().getTime();
+        localStorage.setItem('cartTimestamp', currentTime);
+
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Construct alert message with product details
+        var alertMessage = 'Product ' + product.name + ' added to cart'
+                           
+                           
+        alert(alertMessage);
+    }
+        // Check if cart is older than 3 hours and clear it
+        function checkCartExpiration() {
+          var cartTimestamp = parseInt(localStorage.getItem('cartTimestamp'));
+          if (cartTimestamp) {
+              var currentTime = new Date().getTime();
+              var expirationTime = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
+              if (currentTime - cartTimestamp > expirationTime) {
+                  localStorage.removeItem('cart');
+                  localStorage.removeItem('cartTimestamp');
+              }
+          }
+      }
+  
+      // Call checkCartExpiration initially
+      checkCartExpiration();
+});
+</script>
+
+<!--buy now button start -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var addToCartButtons = document.querySelectorAll('.btn-ecommBuyNow');
+    addToCartButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            var productInfoSection = this.closest('.product-info-section');
+            var selectedColor = productInfoSection.querySelector('input[name="color"]:checked');
+            var selectedSize = productInfoSection.querySelector('.form-select');
+            
+            // Check if color is available but not selected
+            if (selectedColor === null && productInfoSection.querySelector('input[name="color"]') !== null) {
+                alert('Please select a Color & Size.');
+                return;
+            }
+
+            // Check if size is not available
+            var sizeValue = selectedSize !== null ? selectedSize.value : 'No';
+            
+            var product = {
+                productId: "{{ product.id }}",
+                name: "{{ product.name }}",
+                price: {{ product.price }},
+                quantity: parseInt(productInfoSection.querySelector('.quantity-input').value),
+                imagePath: "{{ image_url }}",
+                size: sizeValue,
+                color: selectedColor !== null ? selectedColor.value : 'No'
+            };
+            
+            addToCart(product);
+        });
+    });
+    
+    function addToCart(product) {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        var existingProductIndex = cart.findIndex(function(item) {
+            return item.productId === product.productId && item.size === product.size && item.color === product.color;
+        });
+
+        if (existingProductIndex !== -1) {
+            // Merge products with the same productId, size, and color
+            cart[existingProductIndex].quantity = product.quantity;
+        } else {
+            // Add new product to cart
+            cart.push(product);
+        }
+       // Set timestamp for cart
+        var currentTime = new Date().getTime();
+        localStorage.setItem('cartTimestamp', currentTime);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+      
+        window.location.href = "{% url 'checkOut' %}";
+    }
+            
+    // Check if cart is older than 3 hours and clear it
+    function checkCartExpiration() {
+        var cartTimestamp = parseInt(localStorage.getItem('cartTimestamp'));
+        if (cartTimestamp) {
+            var currentTime = new Date().getTime();
+            var expirationTime =  3 * 60 * 60 * 1000; // 3 hours in milliseconds
+            if (currentTime - cartTimestamp > expirationTime) {
+                localStorage.removeItem('cart');
+                localStorage.removeItem('cartTimestamp');
+            }
+        }
+    }
+  
+    // Call checkCartExpiration initially
+    checkCartExpiration();
+});
+</script>
+
+<!--buy now button end-->
+
+
+
+
+
+<!-- -->
+<script>
+  // Function to load cart data and update modal content
+  function loadCartData() {
+      // Retrieve cart items from localStorage
+      var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      // Display cart item count
+      document.getElementById('cartItemCount').innerText = cartItems.length + ' ITEMS';
+      
+      
+      // Display cart items
+      var cartList = document.getElementById('cartItems');
+      cartList.innerHTML = ''; // Clear previous items
+      
+      // Limit the number of items displayed to maximum 3
+      var maxItems = Math.min(cartItems.length, 3);
+      for (var i = 0; i < maxItems; i++) {
+          var item = cartItems[i];
+          // Create HTML markup for each cart item
+          var itemElement = document.createElement('div');
+          itemElement.classList.add('d-flex', 'align-items-center', 'mb-3');
+          itemElement.innerHTML = `
+          <a class="dropdown-item" href="javascript:;">
+            <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                    <h6 class="cart-product-title">${item.name}</h6>
+                    <p class="cart-product-price">${item.quantity} X ${item.price} TK</p>
+                </div>
+                <div class="position-relative">
+
+                    <div class="cart-product">
+                        <img src="${item.imagePath}" class="" alt="product image"/>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </a>
+          `;
+
+
+          cartList.appendChild(itemElement);
+          document.getElementById('cartItemNumberCount').innerText = cartItems.length;
+
+      }
+      
+      // If there are more than 4 items, display a message
+      if (cartItems.length > 3) {
+          var moreItemsMessage = document.createElement('p');
+          moreItemsMessage.classList.add('text-muted', 'mb-0');
+          moreItemsMessage.innerText = ' And ' + (cartItems.length - 3) + ' more items...';
+          cartList.appendChild(moreItemsMessage);
+      }
+      
+      // Calculate and display total price
+      var totalPrice = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+      document.getElementById('cartTotalPrice').innerText =  totalPrice +' TK';
+  }
+  // Call loadCartData function when the page loads
+  window.addEventListener('load', loadCartData);
+</script>
+
+
+
+<!-- showing the cart items in the cart logo modal end-->
+<!-- quantity increment and decrement  buttons -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find all quantity input elements
+    var quantityInputs = document.querySelectorAll('.quantity-input');
+    
+    // Attach event listeners to each quantity input
+    quantityInputs.forEach(function(input) {
+        // Find the associated increase and decrease buttons
+        var decreaseBtn = input.parentElement.querySelector('.decrease-btn');
+        var increaseBtn = input.parentElement.querySelector('.increase-btn');
+        
+        // Add event listener to the decrease button
+        decreaseBtn.addEventListener('click', function() {
+            // Get the current value of the input
+            var value = parseInt(input.value);
+            // Decrement the value if greater than 0
+            if (value > 0) {
+                input.value = value - 1;
+            }
+        });
+        
+        // Add event listener to the increase button
+        increaseBtn.addEventListener('click', function() {
+            // Get the current value of the input
+            var value = parseInt(input.value);
+            // Increment the value
+            input.value = value + 1;
+        });
+    });
+});
+
+
+
+</script>
+<!-- quantity increment and decrement  buttons -->
+
+
+
+
+
+
+<!-- for cart page -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    var cartList = document.getElementById('cartList');
+    var subtotalElement = document.getElementById('subtotal');
+    var orderTotalElement = document.getElementById('orderTotal');
+
+    // Function to calculate subtotal and order total
+    function calculateTotals() {
+      var subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+      subtotalElement.textContent =  subtotal.toFixed(2) +' TK';
+      orderTotalElement.textContent = subtotal.toFixed(2) +' TK';
+    }
+
+    // Function to generate HTML for each cart item
+    function generateCartItemHTML(item, index) {
+      return `
+        <div class="row align-items-center g-3">
+          <div class="col-12 col-lg-6">
+            <div class="d-lg-flex align-items-center gap-3">
+              <div class="cart-img text-center text-lg-start">
+                <img src="${item.imagePath}" width="130" alt="${item.name}" />
+              </div>
+              <div class="cart-detail text-center text-lg-start">
+                <h6 class="mb-2">${item.name}</h6>
+                <p class="mb-0">Size: <span>${item.size}</span></p>
+                <p class="mb-2">Color: <span>${item.color}</span></p>
+                <h5 class="mb-0">${item.price.toFixed(2) +' TK'}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="quantity-selector">
+              <button class="decrease-btn" data-index="${index}">-</button>
+              <input type="number" class="quantity-input" value="${item.quantity}" min="0" disabled />
+              <button class="increase-btn" data-index="${index}">+</button>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="text-center">
+              <div class="d-flex gap-3 justify-content-center justify-content-lg-end">
+                <button class="btn btn-outline-dark rounded-0 btn-ecomm remove-item-btn" data-index="${index}">
+                  <i class="bx bx-x"></i> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+      `;
+    }
+
+    // Function to render cart items
+    function renderCartItems() {
+      cartList.innerHTML = '';
+      cartItems.forEach(function(item, index) {
+        var cartItemHTML = generateCartItemHTML(item, index);
+        cartList.insertAdjacentHTML('beforeend', cartItemHTML);
+      });
+    }
+
+    // Render initial cart items
+    renderCartItems();
+    calculateTotals();
+
+    // Attach event listener for remove buttons
+cartList.addEventListener('click', function(event) {
+  var target = event.target;
+  if (target.classList.contains('remove-item-btn')) {
+    var index = parseInt(target.getAttribute('data-index'));
+    cartItems.splice(index, 1);
+    renderCartItems();
+    calculateTotals();
+    updateLocalStorage();
+    document.getElementById('cartItemNumberCount').innerText = cartItems.length;
+  }
+});
+
+// Attach event listener for quantity buttons
+cartList.addEventListener('click', function(event) {
+  var target = event.target;
+  if (target.classList.contains('increase-btn')) {
+    var index = parseInt(target.getAttribute('data-index'));
+    cartItems[index].quantity++;
+    renderCartItems();
+    calculateTotals();
+    updateLocalStorage();
+  } else if (target.classList.contains('decrease-btn')) {
+    var index = parseInt(target.getAttribute('data-index'));
+    if (cartItems[index].quantity > 1) {
+      cartItems[index].quantity--;
+      renderCartItems();
+      calculateTotals();
+      updateLocalStorage();
+    }
+  }
+});
+
+
+    // Function to update localStorage
+    function updateLocalStorage() {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+
+    // Add event listener for clear cart button
+    var clearCartBtn = document.getElementById('clearCartBtn');
+    clearCartBtn.addEventListener('click', function() {
+      localStorage.removeItem('cart');
+      cartItems = [];
+      renderCartItems();
+      calculateTotals();
+    });
+
+    // Add event listener for update cart button if needed
+    var updateCartBtn = document.getElementById('updateCartBtn');
+    updateCartBtn.addEventListener('click', function() {
+      // Implement your logic to update cart here
+      // This can include modifying quantities or removing items
+      // After updating the cart, call renderCartItems() and calculateTotals()
+    });
+  });
+</script>
+<!-- for cart page -->
+<script>
+  function sortProducts(selectElement) {
+      var selectedOption = selectElement.value;
+      window.location.href = window.location.pathname + '?sort_by=' + selectedOption;
+  }
+</script>
+
+
+
+
+
+</body>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+     
+      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="spinner-border m-2" role="status">
+        <span class="visually-hidden"></span>
+      </div>
+      <h3>Product Added Successfully</h3>
+    </div>
+  </div>
+</div>
+</div>
+</html>
