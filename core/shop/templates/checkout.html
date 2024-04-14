@@ -55,6 +55,7 @@
 												
 														<div class="col-md-6">
 															<label class="form-label">State/Province</label>
+															<p style="color:red;">(Delivary inside Dhaka 70Tk outside Dhaka 130 TK)</p>
 															<select class="form-select rounded-0" name="state" id="stateSelect"required>
 																<option value="" selected disabled>Select State</option>
 
@@ -132,7 +133,6 @@
 														<div class="col-md-6">
 															
 															<label class="form-label" >City /Area</label>
-															<p style="color:red;">(Delivary inside Dhaka 70Tk outside Dhaka 130 TK)</p>
 															<select class="form-select rounded-0 " name="city" id="citySelect"  required>
 																<option value="" selected disabled>Select City</option>
 
@@ -240,33 +240,67 @@
 		<!--prevent to submit empty cart -->
 		<script>
 			document.addEventListener("DOMContentLoaded", function() {
-				// Function to check if the cart is empty
-				function isCartEmpty() {
-					var cart = JSON.parse(localStorage.getItem('cart')) || [];
-					return cart.length === 0;
+				var confirmOrderBtn = document.getElementById('confirmOrderBtn');
+				var saveOrderInfoCheckbox = document.getElementById('saveOrderInfoCheckbox');
+			
+				// Function to update order total
+				function updateOrderTotal() {
+					// Your code to calculate order total here
+					var orderTotal = 0; // Example: Calculate order total based on items in the cart
+					document.getElementById('orderTotal').textContent = orderTotal.toFixed(2) + ' TK';
+					document.getElementById('orderTotalSend').value = orderTotal.toFixed(2);
 				}
 			
-				// Function to enable or disable the confirm order button based on cart emptiness
-				function toggleConfirmOrderButton() {
-					var confirmOrderBtn = document.getElementById('confirmOrderBtn');
-					if (isCartEmpty()) {
+				// Function to check if all required fields are filled
+				function checkRequiredFields() {
+					var requiredFieldsFilled = true;
+			
+					// Example: Check if the save order info checkbox is checked
+					if (!saveOrderInfoCheckbox.checked) {
+						requiredFieldsFilled = false;
+					}
+			
+					// Add more checks for other required fields as needed
+			
+					return requiredFieldsFilled;
+				}
+			
+				// Function to check if the cart is empty
+				function checkCartNotEmpty() {
+					var cart = JSON.parse(localStorage.getItem('cart')) || [];
+					return cart.length > 0;
+				}
+			
+				// Function to enable/disable confirm order button
+				function updateConfirmOrderButton() {
+					
+					if (!checkRequiredFields() || !checkCartNotEmpty()) {
 						confirmOrderBtn.disabled = true;
-						confirmOrderBtn.innerText = 'Your Cart is Empty'; // Change the text
+						confirmOrderBtn.textContent = 'Please fill all required fields and ensure cart is not empty';
 					} else {
 						confirmOrderBtn.disabled = false;
-						confirmOrderBtn.innerText = 'Confirm Order'; // Reset to original text
+						confirmOrderBtn.textContent = 'Confirm Order';
 					}
 				}
 			
-				// Initial toggle of confirm order button on page load
-				toggleConfirmOrderButton();
-			
-				// Event listener for checkbox change
-				var saveOrderInfoCheckbox = document.getElementById('saveOrderInfoCheckbox');
+				// Event listener for save order info checkbox change
 				saveOrderInfoCheckbox.addEventListener('change', function() {
-					toggleConfirmOrderButton();
+					updateConfirmOrderButton();
 				});
+			
+				// Event listener for confirm order button click
+				confirmOrderBtn.addEventListener('click', function() {
+					if (confirmOrderBtn.disabled) {
+						// Prevent form submission if button is disabled
+						event.preventDefault();
+					}
+				});
+			
+				// Initial check when the page loads
+				updateOrderTotal();
+				updateConfirmOrderButton();
 			});
+			
 			
 			
 		</script>
@@ -1639,7 +1673,7 @@
         // Function to calculate and update the amounts
         function updateAmounts() {
             // Get the selected city
-            var selectedCity = document.querySelector('select[name="city"]').value;
+            var selectedCity = document.querySelector('select[name="state"]').value;
             var deliveryCharge = selectedCity === 'Dhaka' ? 70 : 130;
 
             // Get the online payment checkbox value
@@ -1665,7 +1699,7 @@
         updateAmounts();
 
         // Attach event listeners to city dropdown and online payment checkbox
-        var cityDropdown = document.querySelector('select[name="city"]');
+        var cityDropdown = document.querySelector('select[name="state"]');
         cityDropdown.addEventListener('change', updateAmounts);
 
         var onlinePaymentCheckbox = document.querySelector('input[name="payment_typeOnline"]');

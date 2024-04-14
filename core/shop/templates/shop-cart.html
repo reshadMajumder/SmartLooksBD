@@ -46,7 +46,7 @@
                 <h5 class="mb-0">Order Total: <span class="float-end" id="orderTotal">0.00 TK</span></h5>
                 <div class="my-4"></div>
                 <div class="d-grid">
-                  <a href="{% url "checkOut" %} " class="btn btn-dark btn-ecomm">Proceed to Checkout</a>
+                  <a id="checkOutBtn" href="{% url "checkOut" %} " class="btn btn-dark btn-ecomm">Proceed to Checkout</a>
                 </div>
               </div>
             </div>
@@ -64,3 +64,34 @@
 
 
 {% endblock body %}
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var checkOutBtn = document.getElementById('checkOutBtn');
+
+    // Function to check if the cart is empty
+    function isCartEmpty() {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        return cart.length === 0;
+    }
+
+    // Function to update button state and text
+    function updateButtonState() {
+        var cartEmpty = isCartEmpty();
+        if (cartEmpty) {
+            checkOutBtn.disabled = true;
+            checkOutBtn.innerHTML = "No Products in Cart";
+        } else {
+            checkOutBtn.disabled = false;
+            checkOutBtn.innerHTML = "Proceed to Checkout";
+        }
+    }
+
+    // Update button state on page load
+    updateButtonState();
+});
+
+
+
+</script>
