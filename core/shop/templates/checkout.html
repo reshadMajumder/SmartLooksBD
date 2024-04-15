@@ -59,7 +59,19 @@
 															<select class="form-select rounded-0" name="state" id="stateSelect"required>
 																<option value="" selected disabled>Select State</option>
 
-
+																<option value="Bagerhat">Bagerhat</option>
+																<option value="Bandarban">Bandarban</option>
+																<option value="Barguna">Barguna</option>
+																<option value="Barisal">Barisal</option>
+																<option value="Bhola">Bhola</option>
+																<option value="Bogra">Bogra</option>
+																<option value="Brahmanbaria">Brahmanbaria</option>
+																<option value="Chandpur">Chandpur</option>
+																<option value="Chapai Nawabganj">Chapai Nawabganj</option>
+																<option value="Chittagong">Chittagong</option>
+																<option value="Chuadanga">Chuadanga</option>
+																<option value="Comilla">Comilla</option>
+																<option value="Coxs Bazar">Cox's Bazar</option>
 																<option value="Dhaka">Dhaka</option>
 																<option value="Dinajpur">Dinajpur</option>
 																<option value="Faridpur">Faridpur</option>
@@ -111,19 +123,7 @@
 																<option value="Sylhet">Sylhet</option>
 																<option value="Tangail">Tangail</option>
 																<option value="Thakurgaon">Thakurgaon</option>
-																<option value="Bagerhat">Bagerhat</option>
-																<option value="Bandarban">Bandarban</option>
-																<option value="Barguna">Barguna</option>
-																<option value="Barisal">Barisal</option>
-																<option value="Bhola">Bhola</option>
-																<option value="Bogra">Bogra</option>
-																<option value="Brahmanbaria">Brahmanbaria</option>
-																<option value="Chandpur">Chandpur</option>
-																<option value="Chapai Nawabganj">Chapai Nawabganj</option>
-																<option value="Chittagong">Chittagong</option>
-																<option value="Chuadanga">Chuadanga</option>
-																<option value="Comilla">Comilla</option>
-																<option value="Coxs Bazar">Cox's Bazar</option>
+																
 
 
 															</select>
@@ -162,7 +162,8 @@
 															<hr>
 															<div>
 															  <label for="send_phone_number">Sender Phone Number:</label> <br>
-															  <input type="text" id="send_phone_number" name="send_phone_number" required>
+															  <input type="text"id="send_phone_number"  name="send_phone_number" placeholder="Phone number*"  pattern="(^\+88)?01[0-9]{9}" title="Please enter a valid Bangladeshi phone number. It should either start with +88 and be followed by 11 digits or start with 01 and be followed by 9 digits." minlength="11" maxlength="14" required>
+
 															</div>
 															<br>
 															<div>
@@ -237,12 +238,23 @@
 	</div>
 
 		<!--end page wrapper -->
+
+		
 		<!--prevent to submit empty cart -->
 		<script>
 			document.addEventListener("DOMContentLoaded", function() {
 				var confirmOrderBtn = document.getElementById('confirmOrderBtn');
 				var saveOrderInfoCheckbox = document.getElementById('saveOrderInfoCheckbox');
-			
+				var paymentTypeCashCheckbox = document.querySelector('input[name="payment_type"]');
+				var paymentTypeOnlineCheckbox = document.querySelector('input[name="payment_typeOnline"]');
+				var fullNameInput = document.querySelector('input[name="fname"]');
+				var phoneNumberInput = document.querySelector('input[name="phone"]');
+				var stateSelect = document.getElementById('stateSelect');
+				var citySelect = document.getElementById('citySelect');
+				var addressTextarea = document.querySelector('textarea[name="address"]');
+				var senderPhoneNumberInput = document.getElementById('send_phone_number');
+				var transactionNumberInput = document.getElementById('transaction_number');
+		
 				// Function to update order total
 				function updateOrderTotal() {
 					// Your code to calculate order total here
@@ -250,44 +262,82 @@
 					document.getElementById('orderTotal').textContent = orderTotal.toFixed(2) + ' TK';
 					document.getElementById('orderTotalSend').value = orderTotal.toFixed(2);
 				}
-			
+		
 				// Function to check if all required fields are filled
 				function checkRequiredFields() {
 					var requiredFieldsFilled = true;
-			
+		
 					// Example: Check if the save order info checkbox is checked
 					if (!saveOrderInfoCheckbox.checked) {
 						requiredFieldsFilled = false;
 					}
-			
-					// Add more checks for other required fields as needed
-			
+		
+					// Check if Full Name and Phone Number fields are filled
+					if (fullNameInput.value.trim() === '' || phoneNumberInput.value.trim() === '') {
+						requiredFieldsFilled = false;
+					}
+		
+					// Check if State/Province, City/Area, and Address fields are filled
+					if (stateSelect.value.trim() === '' || citySelect.value.trim() === '' || addressTextarea.value.trim() === '') {
+						requiredFieldsFilled = false;
+					}
+		
 					return requiredFieldsFilled;
 				}
-			
+		
 				// Function to check if the cart is empty
 				function checkCartNotEmpty() {
 					var cart = JSON.parse(localStorage.getItem('cart')) || [];
 					return cart.length > 0;
 				}
-			
+		
 				// Function to enable/disable confirm order button
 				function updateConfirmOrderButton() {
-					
-					if (!checkRequiredFields() || !checkCartNotEmpty()) {
+					var cartNotEmpty = checkCartNotEmpty();
+					var requiredFieldsFilled = checkRequiredFields();
+					var paymentTypeChecked = paymentTypeCashCheckbox.checked || paymentTypeOnlineCheckbox.checked;
+					var senderPhoneNumberFilled = senderPhoneNumberInput.value.trim() !== '';
+					var transactionNumberFilled = transactionNumberInput.value.trim() !== '';
+		
+					if (!requiredFieldsFilled || !cartNotEmpty || !paymentTypeChecked || (paymentTypeOnlineCheckbox.checked && (!senderPhoneNumberFilled || !transactionNumberFilled))) {
 						confirmOrderBtn.disabled = true;
-						confirmOrderBtn.textContent = 'Please fill all required fields and ensure cart is not empty';
+						confirmOrderBtn.textContent = 'Please fill all required fields, ensure cart is not empty, and select a payment type';
 					} else {
 						confirmOrderBtn.disabled = false;
 						confirmOrderBtn.textContent = 'Confirm Order';
 					}
 				}
-			
+		
 				// Event listener for save order info checkbox change
-				saveOrderInfoCheckbox.addEventListener('change', function() {
+				saveOrderInfoCheckbox.addEventListener('change', updateConfirmOrderButton);
+		
+				// Event listener for payment type cash checkbox change
+				paymentTypeCashCheckbox.addEventListener('change', function() {
+					if (paymentTypeCashCheckbox.checked) {
+						paymentTypeOnlineCheckbox.checked = false;
+					}
 					updateConfirmOrderButton();
 				});
-			
+		
+				// Event listener for payment type online checkbox change
+				paymentTypeOnlineCheckbox.addEventListener('change', function() {
+					if (paymentTypeOnlineCheckbox.checked) {
+						paymentTypeCashCheckbox.checked = false;
+					}
+					updateConfirmOrderButton();
+				});
+		
+				// Event listeners for Full Name, Phone Number, State/Province, City/Area, and Address input fields change
+				fullNameInput.addEventListener('input', updateConfirmOrderButton);
+				phoneNumberInput.addEventListener('input', updateConfirmOrderButton);
+				stateSelect.addEventListener('change', updateConfirmOrderButton);
+				citySelect.addEventListener('change', updateConfirmOrderButton);
+				addressTextarea.addEventListener('input', updateConfirmOrderButton);
+		
+				// Event listeners for sender phone number and transaction number input fields change
+				senderPhoneNumberInput.addEventListener('input', updateConfirmOrderButton);
+				transactionNumberInput.addEventListener('input', updateConfirmOrderButton);
+		
 				// Event listener for confirm order button click
 				confirmOrderBtn.addEventListener('click', function() {
 					if (confirmOrderBtn.disabled) {
@@ -295,15 +345,16 @@
 						event.preventDefault();
 					}
 				});
-			
+		
 				// Initial check when the page loads
 				updateOrderTotal();
 				updateConfirmOrderButton();
 			});
-			
-			
-			
 		</script>
+		
+		
+		
+		
 		<!--prevent to submit empty cart -->
 		<!--end page wrapper -->
 
@@ -1352,7 +1403,6 @@
 					else if (state === 'Shariatpur') {
 						return [ "Bhedarganj",
 						"Damudya",
-						"Damudya",
 						"Ghushirhut",
 						"Gosairhat",
 						"Kashipur",
@@ -1626,21 +1676,26 @@
 		
 		<script>
 			//for payment handle 
+			
 			function handlePaymentTypeChange(checkbox) {
-				var checkboxes = document.getElementsByName("payment_type");
-				checkboxes.forEach(function(item) {
-					if (item !== checkbox) {
-						item.checked = false;
-					}
-				});
-				if (checkbox.value === "online") {
-					document.getElementById("send_phone_number").setAttribute("required", "true");
-					document.getElementById("transaction_number").setAttribute("required", "true");
-				} else {
-					document.getElementById("send_phone_number").removeAttribute("required","false");
-					document.getElementById("transaction_number").removeAttribute("required", "false");
+				var cashCheckbox = document.querySelector('input[name="payment_type"]');
+				var onlineCheckbox = document.querySelector('input[name="payment_typeOnline"]');
+				var sendPhoneNumberInput = document.getElementById('send_phone_number');
+				var transactionNumberInput = document.getElementById('transaction_number');
+			
+				if (checkbox === cashCheckbox && cashCheckbox.checked) {
+					// Cash option is chosen, uncheck online payment option and remove required attribute from sender phone number and transaction number inputs
+					onlineCheckbox.checked = false;
+					sendPhoneNumberInput.removeAttribute('required');
+					transactionNumberInput.removeAttribute('required');
+				} else if (checkbox === onlineCheckbox && onlineCheckbox.checked) {
+					// Online payment option is chosen, uncheck cash option and add required attribute to sender phone number and transaction number inputs
+					cashCheckbox.checked = false;
+					sendPhoneNumberInput.setAttribute('required', 'required');
+					transactionNumberInput.setAttribute('required', 'required');
 				}
 			}
+			
 		</script>
 		<script>
 			// for unique check button choice of location
@@ -1672,28 +1727,29 @@
 
         // Function to calculate and update the amounts
         function updateAmounts() {
-            // Get the selected city
-            var selectedCity = document.querySelector('select[name="state"]').value;
-            var deliveryCharge = selectedCity === 'Dhaka' ? 70 : 130;
-
-            // Get the online payment checkbox value
-            var onlinePaymentCheckbox = document.querySelector('input[name="payment_typeOnline"]');
-            var paymentCharge = onlinePaymentCheckbox.checked ? subtotal * 0.02 : 0;
-
-            // Calculate order total including delivery charge, discount, and online payment charge
-            var orderTotal = subtotal + deliveryCharge + paymentCharge;
-            var discount = 0; // Discount is 0 because we are not rounding the order total
-
-            // Display subtotal excluding delivery charge and online payment charge
-            document.getElementById('subtotal').innerText =  subtotal.toFixed(2) ;
-            
-            // Display delivery charge, online payment charge, discount, and order total
-            document.getElementById('deliveryCharge').innerText = deliveryCharge.toFixed(2);
-            document.getElementById('onlinePaymentCharge').innerText =  paymentCharge.toFixed(2);
-            document.getElementById('discount').innerText =  discount.toFixed(2);
-            document.getElementById('orderTotal').innerText =  orderTotal.toFixed(2);
-            document.getElementById('orderTotalSend').value = orderTotal.toFixed(2) ;
-        }
+			// Get the selected city
+			var selectedCity = document.querySelector('select[name="state"]').value;
+			// Set delivery charge to 0 if no city is selected
+			var deliveryCharge = selectedCity ? (selectedCity === 'Dhaka' ? 70 : 130) : 0;
+		
+			// Get the online payment checkbox value
+			var onlinePaymentCheckbox = document.querySelector('input[name="payment_typeOnline"]');
+			var paymentCharge = onlinePaymentCheckbox.checked ? subtotal * 0.02 : 0;
+		
+			// Calculate order total including delivery charge, discount, and online payment charge
+			var orderTotal = subtotal + deliveryCharge + paymentCharge;
+			var discount = 0; // Discount is 0 because we are not rounding the order total
+		
+			// Display subtotal excluding delivery charge and online payment charge
+			document.getElementById('subtotal').innerText =  subtotal.toFixed(2) ;
+		
+			// Display delivery charge, online payment charge, discount, and order total
+			document.getElementById('deliveryCharge').innerText = deliveryCharge.toFixed(2);
+			document.getElementById('onlinePaymentCharge').innerText =  paymentCharge.toFixed(2);
+			document.getElementById('discount').innerText =  discount.toFixed(2);
+			document.getElementById('orderTotal').innerText =  orderTotal.toFixed(2);
+			document.getElementById('orderTotalSend').value = orderTotal.toFixed(2) ;
+		}
 
         // Call updateAmounts initially
         updateAmounts();

@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--favicon-->
-    <link rel="icon" href="{% static "images/icons/sl.png" %} " type="image/png" />
+    <link rel="icon" href="{% static "images/icons/logo-icon.jpg" %} " type="image/png" />
     <!--plugins-->
     <link href="{% static "plugins/OwlCarousel/css/owl.carousel.min.css" %} "rel="stylesheet"/>
 
@@ -106,10 +106,9 @@
 
                         <!-- cart modal start-->
                         <div class="dropdown-menu dropdown-menu-end "style="max-width: 300px; overflow-y: auto;" >
-                          <a href="{% url "cart" %}">
+                          <a href="#">
                               <div class="cart-header">
-                                  <p class="cart-header-title mb-0" id="cartItemCount">0 ITEMS</p>
-                                  <p class="cart-header-clear ms-auto mb-0">VIEW CART</p>
+                                  <p class="cart-header-title mb-0 " id="cartItemCount">0 ITEMS</p>
                               </div>
                           </a>
                           <div class="cart-list" id="cartItems">
@@ -121,9 +120,12 @@
                                   <h5 class="mb-0 ms-auto" id="cartTotalPrice">৳0.00</h5>
                               </div>
                           </a>
-                          <div class="d-grid p-3 border-top">
-                              <a href="{% url "checkOut" %}" class="btn btn-dark "> CHECKOUT</a>
-                          </div>
+                          <div class="d-flex justify-content-between p-3 border-top">
+                            <a href="{% url "checkOut" %}" class="btn btn-dark me-2">CHECKOUT</a>
+                            <a href="{% url "cart" %}" class="btn btn-dark">VIEW CART</a>
+                        </div>
+                        
+                        
                       </div>
                             <!-- caet modal end-->
 
