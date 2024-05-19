@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--favicon-->
-    <link rel="icon" href="{% static "images/icons/sl.png" %} " type="image/png" />
+    <link rel="icon" href="{% static "images/icons/logo-icon.jpg" %} " type="image/png" />
     <!--plugins-->
     <link href="{% static "plugins/OwlCarousel/css/owl.carousel.min.css" %} "rel="stylesheet"/>
 
@@ -106,14 +106,15 @@
 
                         <!-- cart modal start-->
                         <div class="dropdown-menu dropdown-menu-end "style="max-width: 300px; overflow-y: auto;" >
-                          <a href="{% url "cart" %}">
+                          <a href="#">
                               <div class="cart-header">
                                   <p class="cart-header-title mb-0" id="cartItemCount">0 ITEMS</p>
-                                  <p class="cart-header-clear ms-auto mb-0">VIEW CART</p>
                               </div>
                           </a>
                           <div class="cart-list" id="cartItems">
                               <!-- Cart items will be dynamically added here -->
+                              
+                              
                           </div>
                           <a href="javascript:;">
                               <div class="text-center cart-footer d-flex align-items-center">
@@ -121,9 +122,10 @@
                                   <h5 class="mb-0 ms-auto" id="cartTotalPrice">৳0.00</h5>
                               </div>
                           </a>
-                          <div class="d-grid p-3 border-top">
-                              <a href="{% url "cart" %}" class="btn btn-dark "> CHECKOUT</a>
-                          </div>
+                            <div class="d-flex justify-content-between p-3 border-top">
+                                <a href="{% url "checkOut" %}" class="btn btn-dark me-2">CHECKOUT</a>
+                                <a href="{% url "cart" %}" class="btn btn-dark">VIEW CART</a>
+                            </div>
                       </div>
                             <!-- caet modal end-->
 
@@ -231,14 +233,17 @@
 
 
 {% endblock body %}
-<a href="https://wa.me/+8801627076527?text=I'm%20interested%20in%20your%20product" target="_blank" class="wp_text">
+
+<!--whats app api-->
+<a href="https://wa.me/+8801333708452?text=Anyone%20available%20to%20chat?" target="_blank" class="wp_text">
 
   <img src="{% static "images/icons/wpapp.png" %}" alt="whatsapp Logo">
-  <h6>Hello..!!</h6>
   <a/>
+
+
 <!-- back to top btn-->
 <button onclick="topFunction()" id="backToTopBtn">
-  <img src="{% static "images/icons/top.png" %}" alt="Logo" width="60px" height="60px"/>
+  <img src="{% static "images/icons/top.png" %}" alt="Logo">
 </button>
 <!-- back to top btn-->
 
@@ -335,7 +340,7 @@
         <div
           class="d-flex flex-column flex-lg-row align-items-center gap-3 justify-content-between"
         >
-          <p class="mb-0">Copyright © 2022. All right reserved.</p>
+          <p class="mb-0">Copyright © 2024. All right reserved --smartlooksbd.com.</p>
 
           <div class="payment-icon">
             <div class="row row-cols-auto g-2 justify-content-end">
@@ -398,7 +403,7 @@ function scrollFunction() {
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-  document.body.scrollTop = 0;            // For Safari
+  document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 </script>
@@ -488,6 +493,7 @@ function topFunction() {
 });
 </script>
 
+
 <!--buy now button start -->
 
 <script>
@@ -565,10 +571,6 @@ function topFunction() {
 </script>
 
 <!--buy now button end-->
-
-
-
-
 
 <!-- -->
 <script>

@@ -74,7 +74,9 @@
 													</div>
 													
 												  </div>
-												  {% if product.size.all %}
+												
+    											{% if product.size.all %}
+
 												<div class="col">
 													<label class="form-label">Size</label>
 													<select class="form-select form-select-sm">
@@ -85,8 +87,8 @@
 												</div>
 												{% endif %}
 
-
 												{% if product.color.all %}
+
 												<div class="col">
 		
 													<label class="form-label">Choose Colors</label>
@@ -98,7 +100,8 @@
 														
 													</div>
 												</div>
-												{% endif %}
+										        {% endif %}
+
 											<!--end row-->
 											
 											<div class="d-flex gap-3 mt-3 align-items-center justify-content-center">
@@ -107,7 +110,7 @@
 								
 												</div>
 												<div class="d-flex gap-2 mt-5">
-													<button class="btn btn-dark btn-ecommBuyNow"><i class="bx bxs-cart-add"></i>Add to Cart</button> 
+													<button class="btn btn-dark btn-ecommBuyNow"><i class="bx bxs-cart-add"></i>Buy Now</button> 
 												</div>
 												
 											</div>

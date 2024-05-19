@@ -6,6 +6,14 @@ from django .contrib.auth import login as auth_login
 from django.contrib import messages
 # Create your views here.
 
+#email settings import
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
+
+
+
 def home(request):
     sort_by = request.GET.get('sort_by', 'newest')  # Default sorting by newest
 
@@ -125,7 +133,6 @@ def  login(request):
 
 
 
-
 def register(request):
     if request.method == 'POST':
         data = request.POST
@@ -196,6 +203,18 @@ def checkOut(request):
 
         )
         order.save()
+         # Send email notification
+        if paymentCOD=='Cash':
+            order_details = f"Products:\n{itemsJSON} \nName  : {Name}\nEmail  : {email}\nPhone : {phone}\n\nState   : {state}\nCity    : {city}\nAddress : {address}\n\nPayment Method: {paymentCOD}\n\nTotal Payment: {Total_Payment}\n"
+        else:    
+            order_details = f"Products:\n{itemsJSON} \nName  : {Name}\nEmail  : {email}\nPhone : {phone}\n\nState   : {state}\nCity    : {city}\nAddress : {address}\n\nPayment Method: {paymentOnline}\nOnline Sender Phone Number: {online_Sender_phone_number}\nOnline Transaction ID: {online_transaction_id}\n\nTotal Payment: {Total_Payment}\n"
+
+        # Send email notification
+        subject = f"New Order from {phone}"
+        message = f"A new order has been placed:\n\n{order_details}"
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = ['smartlooksbd@smartlooksbd.com']
+        send_mail(subject, message, from_email, recipient_list)
         return redirect('checkOutMsg')
     return render ( request, 'checkout.html')
 
